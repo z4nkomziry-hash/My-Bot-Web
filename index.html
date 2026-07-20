@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KrdDown - دابەزێنەری ڤیدیۆ و ستۆری بێ لۆگۆ">
+    <title>KrdDown | دابەزێنەری گشتی</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a1a">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;500;700;900&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a1a; --text: #ffffff; --muted: #94a3b8; --glass: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.06); }
+        .light-mode { --bg: #f8fafc; --text: #0f172a; --muted: #64748b; --glass: rgba(15,23,42,0.03); --border: rgba(15,23,42,0.08); }
+        body { font-family: 'Noto Kufi Arabic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; transition: all 0.3s ease; }
+        .glass { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 24px; }
+        .btn-main { background: linear-gradient(135deg, #ec4899, #a855f7); color: #fff; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s ease; border-radius: 16px; padding: 14px 24px; }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(236,72,153,0.4); }
+        .input-field { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 14px; padding: 16px 50px; color: var(--text); width: 100%; font-size: 14px; font-family: inherit; transition: all 0.3s ease; }
+        .input-field:focus { outline: none; border-color: #ec4899; }
+        .modal { display: flex; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: all 0.3s ease; }
+        .modal.show { opacity: 1; pointer-events: auto; }
+        .toast-container { position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 8px; }
+        .toast { background: rgba(15,23,42,0.95); border: 1px solid rgba(255,255,255,0.1); padding: 12px 16px; border-radius: 16px; color: #fff; font-size: 13px; font-weight: 600; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @media (max-width: 640px) { .input-field { padding: 14px 40px; font-size: 13px; } }
+    </style>
+</head>
+<body>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- WELCOME MODAL -->
+    <div id="welcomeModal" class="modal">
+        <div class="glass w-[90%] max-w-[420px] p-6 text-center">
+            <h2 class="text-xl font-black text-white mb-2">🎉 بەخێربێیت بۆ KrdDown</h2>
+            <p class="text-xs text-slate-400 mb-5">کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟</p>
+            <div class="space-y-2.5">
+                <button onclick="selectNetwork('TikTok')" class="w-full bg-white/5 border border-white/10 hover:border-rose-500/50 py-3 px-4 rounded-2xl text-white text-sm font-bold flex items-center justify-between">
+                    <span><i class="fa-brands fa-tiktok text-rose-500 ml-2"></i> TikTok</span>
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
+                </button>
+                <button onclick="selectNetwork('Instagram')" class="w-full bg-white/5 border border-white/10 hover:border-pink-500/50 py-3 px-4 rounded-2xl text-white text-sm font-bold flex items-center justify-between">
+                    <span><i class="fa-brands fa-instagram text-pink-500 ml-2"></i> Instagram</span>
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
+                </button>
+                <button onclick="selectNetwork('YouTube')" class="w-full bg-white/5 border border-white/10 hover:border-red-500/50 py-3 px-4 rounded-2xl text-white text-sm font-bold flex items-center justify-between">
+                    <span><i class="fa-brands fa-youtube text-red-500 ml-2"></i> YouTube</span>
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
+                </button>
+                <button onclick="selectNetwork('Facebook')" class="w-full bg-white/5 border border-white/10 hover:border-sky-500/50 py-3 px-4 rounded-2xl text-white text-sm font-bold flex items-center justify-between">
+                    <span><i class="fa-brands fa-facebook text-sky-500 ml-2"></i> Facebook</span>
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
+                </button>
+                <button onclick="selectNetwork('Snapchat')" class="w-full bg-white/5 border border-white/10 hover:border-amber-400/50 py-3 px-4 rounded-2xl text-white text-sm font-bold flex items-center justify-between">
+                    <span><i class="fa-brands fa-snapchat text-amber-400 ml-2"></i> Snapchat</span>
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <div class="border-b border-white/5 py-2 px-4">
+        <div class="max-w-2xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-pink-500 to-violet-600 flex items-center justify-center">
+                    <i class="fa-solid fa-bolt text-white text-sm"></i>
+                </div>
+                <span class="text-lg font-extrabold">Krd<span class="text-pink-500">Down</span></span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] text-emerald-400 flex items-center gap-1.5">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>Online
+                </span>
+                <button onclick="toggleTheme()" class="text-slate-400 hover:text-white text-sm">
+                    <i id="themeIcon" class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <main class="max-w-2xl mx-auto px-4 py-6">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl sm:text-3xl font-extrabold leading-tight">
+                دابەزێنەری ڤیدیۆ و ستۆری <span class="text-pink-500">بێ لۆگۆ</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-2">لینکی ڤیدیۆکە بنێرە و بە چرکەیەک دایبەزێنە</p>
+        </div>
+
+        <!-- INPUT CARD -->
+        <div class="glass p-5 mb-5">
+            <div class="relative">
+                <i class="fa-solid fa-link absolute right-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                <input type="text" id="videoUrl" placeholder="لینکی ڤیدیۆکە لێرە دابنێ..." class="input-field" autocomplete="off">
+                <button onclick="pasteLink()" class="absolute left-3 top-1/2 -translate-y-1/2 text-xs bg-white/10 hover:bg-white/20 text-slate-300 px-3 py-1.5 rounded-lg transition-all">
+                    <i class="fa-solid fa-paste ml-1"></i> پەیست
+                </button>
+            </div>
+            <button id="downloadBtn" onclick="downloadVideo()" class="btn-main w-full mt-4 text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download"></i> دابەزێنە
+            </button>
+        </div>
+
+        <!-- PREVIEW CARD -->
+        <div id="previewCard" class="hidden glass p-4 mb-5">
+            <video id="previewVideo" class="w-full max-h-[350px] object-contain rounded-xl bg-black" controls></video>
+            <div class="mt-3">
+                <h3 id="previewAuthor" class="font-bold text-sm"></h3>
+                <p id="previewDesc" class="text-xs text-slate-400 mt-1"></p>
+                <div class="flex gap-2 mt-3">
+                    <button id="dlBtn" class="btn-main flex-1 py-2.5 rounded-xl text-xs"><i class="fa-solid fa-download ml-1"></i> داونلۆد</button>
+                    <button id="audioBtn" class="bg-white/10 text-white py-2.5 px-4 rounded-xl text-xs"><i class="fa-solid fa-music"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHOTO CARD -->
+        <div id="photoCard" class="hidden glass p-4 mb-5">
+            <h3 class="font-bold text-sm mb-3">📸 ئەلبومی وێنەکان</h3>
+            <div id="photoGrid" class="grid grid-cols-3 gap-2"></div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="text-center text-[10px] text-slate-600 py-4">
+            <p>© 2026 KrdDown | Zaniyar Al-Mzuri</p>
+        </footer>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
