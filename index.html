@@ -3,134 +3,551 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KrdDown - دابەزێنەری ڤیدیۆ و ستۆری بێ لۆگۆ">
-    <title>KrdDown | دابەزێنەری گشتی</title>
+    <meta name="description" content="KRD-ProDown - باشترین دابەزێنەری ڤیدیۆ و ستۆری بێ لۆگۆ | TikTok, Instagram, YouTube, Facebook, Snapchat, Pinterest">
+    <meta name="keywords" content="KRD-ProDown, video downloader, tiktok no watermark, instagram, youtube, facebook, snapchat, pinterest, kurdish">
+    <meta name="author" content="Zaniyar Al-Mzuri Al-Kurdi">
+    <meta name="theme-color" content="#0a0a1a">
+    <title>KRD-ProDown | دابەزێنەری پڕۆفیشناڵی ڤیدیۆ و ستۆری</title>
+    
     <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0a0a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800;900&display=swap');
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg: #0a0a1a; --text: #ffffff; --muted: #94a3b8; --glass: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.06); }
-        .light-mode { --bg: #f8fafc; --text: #0f172a; --muted: #64748b; --glass: rgba(15,23,42,0.03); --border: rgba(15,23,42,0.08); }
-        body { font-family: 'Noto Kufi Arabic', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; transition: all 0.3s ease; }
-        .glass { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 24px; }
-        .btn-main { background: linear-gradient(135deg, #ec4899, #a855f7); color: #fff; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s ease; border-radius: 16px; padding: 14px 24px; }
-        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(236,72,153,0.4); }
-        .input-field { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 14px; padding: 16px 50px; color: var(--text); width: 100%; font-size: 14px; font-family: inherit; transition: all 0.3s ease; }
+        
+        :root {
+            --bg: #0a0a1a;
+            --text: #ffffff;
+            --text-muted: #94a3b8;
+            --glass: rgba(255,255,255,0.03);
+            --glass-hover: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.06);
+            --border-hover: rgba(255,255,255,0.12);
+            --input-bg: rgba(255,255,255,0.04);
+        }
+
+        .light-mode {
+            --bg: #f8fafc;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --glass: rgba(15,23,42,0.03);
+            --glass-hover: rgba(15,23,42,0.06);
+            --border: rgba(15,23,42,0.08);
+            --border-hover: rgba(15,23,42,0.12);
+            --input-bg: rgba(15,23,42,0.04);
+        }
+
+        body {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #ec4899, #a855f7); border-radius: 10px; }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ec4899, #a855f7);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            padding: 14px 24px;
+            box-shadow: 0 4px 25px rgba(236,72,153,0.25);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(236,72,153,0.4); }
+        .btn-primary:active { transform: translateY(0); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .input-field {
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px 50px;
+            color: var(--text);
+            width: 100%;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
         .input-field:focus { outline: none; border-color: #ec4899; }
-        .modal { display: flex; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: all 0.3s ease; }
+        .input-field::placeholder { color: #64748b; }
+
+        .platform-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: right;
+        }
+        .platform-btn:hover { background: var(--glass-hover); border-color: var(--border-hover); transform: scale(1.02); }
+        .platform-btn.tiktok:hover { border-color: #ff0050; box-shadow: 0 0 20px rgba(255,0,80,0.3); }
+        .platform-btn.instagram:hover { border-color: #e1306c; box-shadow: 0 0 20px rgba(225,48,108,0.3); }
+        .platform-btn.youtube:hover { border-color: #ff0000; box-shadow: 0 0 20px rgba(255,0,0,0.3); }
+        .platform-btn.facebook:hover { border-color: #1877f2; box-shadow: 0 0 20px rgba(24,119,242,0.3); }
+        .platform-btn.snapchat:hover { border-color: #fffc00; box-shadow: 0 0 20px rgba(255,252,0,0.3); }
+        .platform-btn.pinterest:hover { border-color: #e60023; box-shadow: 0 0 20px rgba(230,0,35,0.3); }
+
+        .modal {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
         .modal.show { opacity: 1; pointer-events: auto; }
-        .toast-container { position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 8px; }
-        .toast { background: rgba(15,23,42,0.95); border: 1px solid rgba(255,255,255,0.1); padding: 12px 16px; border-radius: 16px; color: #fff; font-size: 13px; font-weight: 600; animation: slideIn 0.3s ease; }
+        .modal-content { transform: scale(0.8); transition: all 0.3s ease; }
+        .modal.show .modal-content { transform: scale(1); }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .toast {
+            background: rgba(15,23,42,0.95);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 16px;
+            border-radius: 16px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            animation: slideIn 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @media (max-width: 640px) { .input-field { padding: 14px 40px; font-size: 13px; } }
+
+        .quality-badge {
+            padding: 6px 12px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .quality-badge:hover { color: var(--text); border-color: var(--border-hover); background: var(--glass-hover); }
+
+        @media (max-width: 640px) {
+            .input-field { padding: 14px 40px; font-size: 13px; }
+            .platform-btn { padding: 12px 14px; font-size: 13px; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- TOAST CONTAINER -->
     <div class="toast-container" id="toastContainer"></div>
 
     <!-- WELCOME MODAL -->
-    <div id="welcomeModal" class="modal">
-        <div class="glass w-[90%] max-w-[420px] p-6 text-center">
-            <h2 class="text-xl font-black text-white mb-2">🎉 بەخێربێیت بۆ KrdDown</h2>
+    <div id="welcomeModal" class="modal show">
+        <div class="modal-content glass-card w-[90%] max-w-[460px] p-6 text-center">
+            <div class="text-4xl mb-3">🚀</div>
+            <h2 class="text-xl font-black text-white mb-1">بەخێربێیت بۆ KRD-ProDown</h2>
             <p class="text-xs text-slate-400 mb-5">کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟</p>
             <div class="space-y-2.5">
-                <button onclick="selectNetwork('TikTok')" class="w-full bg-white/5 border border-white/10 hover:border-rose-500/50 py-3 px-4 rounded-2xl text-white text-sm font-bold flex items-center justify-between">
-                    <span><i class="fa-brands fa-tiktok text-rose-500 ml-2"></i> TikTok</span>
-                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
+                <button onclick="selectPlatform('TikTok')" class="platform-btn tiktok">
+                    <i class="fa-brands fa-tiktok text-lg text-rose-500"></i> TikTok (تیک تۆک)
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40 mr-auto"></i>
                 </button>
-                <button onclick="selectNetwork('Instagram')" class="w-full bg-white/5 border border-white/10 hover:border-pink-500/50 py-3 px-4 rounded-2xl text-white text-sm font-bold flex items-center justify-between">
-                    <span><i class="fa-brands fa-instagram text-pink-500 ml-2"></i> Instagram</span>
-                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
+                <button onclick="selectPlatform('Instagram')" class="platform-btn instagram">
+                    <i class="fa-brands fa-instagram text-lg text-pink-500"></i> Instagram (ئینستاگرام)
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40 mr-auto"></i>
                 </button>
-                <button onclick="selectNetwork('YouTube')" class="w-full bg-white/5 border border-white/10 hover:border-red-500/50 py-3 px-4 rounded-2xl text-white text-sm font-bold flex items-center justify-between">
-                    <span><i class="fa-brands fa-youtube text-red-500 ml-2"></i> YouTube</span>
-                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
+                <button onclick="selectPlatform('YouTube')" class="platform-btn youtube">
+                    <i class="fa-brands fa-youtube text-lg text-red-500"></i> YouTube (یوتیوب)
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40 mr-auto"></i>
                 </button>
-                <button onclick="selectNetwork('Facebook')" class="w-full bg-white/5 border border-white/10 hover:border-sky-500/50 py-3 px-4 rounded-2xl text-white text-sm font-bold flex items-center justify-between">
-                    <span><i class="fa-brands fa-facebook text-sky-500 ml-2"></i> Facebook</span>
-                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
+                <button onclick="selectPlatform('Facebook')" class="platform-btn facebook">
+                    <i class="fa-brands fa-facebook text-lg text-sky-500"></i> Facebook (فەیسبووک)
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40 mr-auto"></i>
                 </button>
-                <button onclick="selectNetwork('Snapchat')" class="w-full bg-white/5 border border-white/10 hover:border-amber-400/50 py-3 px-4 rounded-2xl text-white text-sm font-bold flex items-center justify-between">
-                    <span><i class="fa-brands fa-snapchat text-amber-400 ml-2"></i> Snapchat</span>
-                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
+                <button onclick="selectPlatform('Snapchat')" class="platform-btn snapchat">
+                    <i class="fa-brands fa-snapchat text-lg text-amber-400"></i> Snapchat (سناپ چات)
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40 mr-auto"></i>
+                </button>
+                <button onclick="selectPlatform('Pinterest')" class="platform-btn pinterest">
+                    <i class="fa-brands fa-pinterest text-lg text-red-600"></i> Pinterest (پینترێست)
+                    <i class="fa-solid fa-chevron-left text-xs opacity-40 mr-auto"></i>
                 </button>
             </div>
+            <p class="text-[10px] text-slate-600 mt-4">© 2026 KRD-ProDown | Zaniyar Al-Mzuri</p>
         </div>
     </div>
 
     <!-- HEADER -->
-    <div class="border-b border-white/5 py-2 px-4">
-        <div class="max-w-2xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-pink-500 to-violet-600 flex items-center justify-center">
+    <header class="border-b border-white/5 py-3 px-4 sticky top-0 z-40 bg-[#0a0a1a]/80 backdrop-blur-2xl">
+        <div class="max-w-3xl mx-auto flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-pink-500 to-violet-600 flex items-center justify-center shadow-lg shadow-pink-500/20 group-hover:shadow-pink-500/40 transition-all duration-300">
                     <i class="fa-solid fa-bolt text-white text-sm"></i>
                 </div>
-                <span class="text-lg font-extrabold">Krd<span class="text-pink-500">Down</span></span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="text-[10px] text-emerald-400 flex items-center gap-1.5">
-                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>Online
+                <span class="text-lg font-extrabold">
+                    <span class="text-white">KRD-</span><span class="bg-gradient-to-r from-pink-400 to-violet-400 bg-clip-text text-transparent">ProDown</span>
                 </span>
-                <button onclick="toggleTheme()" class="text-slate-400 hover:text-white text-sm">
-                    <i id="themeIcon" class="fa-solid fa-moon"></i>
+            </a>
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] text-emerald-400 font-bold flex items-center gap-1.5 bg-emerald-500/5 border border-emerald-500/20 px-2.5 py-1 rounded-full">
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Online
+                </span>
+                <button onclick="toggleTheme()" class="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-slate-400 hover:text-white transition-all">
+                    <i id="themeIcon" class="fa-solid fa-moon text-xs"></i>
                 </button>
             </div>
         </div>
-    </div>
+    </header>
 
-    <!-- MAIN -->
-    <main class="max-w-2xl mx-auto px-4 py-6">
-        <div class="text-center mb-6">
-            <h1 class="text-2xl sm:text-3xl font-extrabold leading-tight">
-                دابەزێنەری ڤیدیۆ و ستۆری <span class="text-pink-500">بێ لۆگۆ</span>
+    <!-- MAIN CONTENT -->
+    <main class="max-w-3xl mx-auto px-4 py-8">
+        
+        <!-- HERO -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight mb-2">
+                دابەزێنەری <span class="bg-gradient-to-r from-pink-400 via-fuchsia-400 to-violet-400 bg-clip-text text-transparent">پڕۆفیشناڵ</span> ڤیدیۆ
             </h1>
-            <p class="text-xs text-slate-400 mt-2">لینکی ڤیدیۆکە بنێرە و بە چرکەیەک دایبەزێنە</p>
+            <p class="text-sm text-slate-400 max-w-lg mx-auto">
+                ڤیدیۆ و ستۆری هەموو تۆڕە کۆمەڵایەتییەکان بە کوالیتی بەرز و بێ واتەرمارک داونلۆد بکە
+            </p>
         </div>
 
         <!-- INPUT CARD -->
-        <div class="glass p-5 mb-5">
+        <div class="glass-card p-5 sm:p-6 mb-5">
             <div class="relative">
-                <i class="fa-solid fa-link absolute right-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                <i class="fa-solid fa-link absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
                 <input type="text" id="videoUrl" placeholder="لینکی ڤیدیۆکە لێرە دابنێ..." class="input-field" autocomplete="off">
-                <button onclick="pasteLink()" class="absolute left-3 top-1/2 -translate-y-1/2 text-xs bg-white/10 hover:bg-white/20 text-slate-300 px-3 py-1.5 rounded-lg transition-all">
-                    <i class="fa-solid fa-paste ml-1"></i> پەیست
+                <button onclick="pasteLink()" class="absolute left-3 top-1/2 -translate-y-1/2 text-xs bg-white/10 hover:bg-white/20 text-slate-300 px-3 py-1.5 rounded-lg transition-all flex items-center gap-1">
+                    <i class="fa-solid fa-paste text-[10px]"></i> پەیست
                 </button>
             </div>
-            <button id="downloadBtn" onclick="downloadVideo()" class="btn-main w-full mt-4 text-sm flex items-center justify-center gap-2">
+            <button id="downloadBtn" onclick="downloadVideo()" class="btn-primary w-full mt-4 text-sm flex items-center justify-center gap-2">
                 <i class="fa-solid fa-download"></i> دابەزێنە
             </button>
         </div>
 
         <!-- PREVIEW CARD -->
-        <div id="previewCard" class="hidden glass p-4 mb-5">
-            <video id="previewVideo" class="w-full max-h-[350px] object-contain rounded-xl bg-black" controls></video>
-            <div class="mt-3">
-                <h3 id="previewAuthor" class="font-bold text-sm"></h3>
-                <p id="previewDesc" class="text-xs text-slate-400 mt-1"></p>
-                <div class="flex gap-2 mt-3">
-                    <button id="dlBtn" class="btn-main flex-1 py-2.5 rounded-xl text-xs"><i class="fa-solid fa-download ml-1"></i> داونلۆد</button>
-                    <button id="audioBtn" class="bg-white/10 text-white py-2.5 px-4 rounded-xl text-xs"><i class="fa-solid fa-music"></i></button>
+        <div id="previewCard" class="hidden glass-card p-4 sm:p-5 mb-5">
+            <div class="relative bg-black rounded-xl overflow-hidden">
+                <video id="previewVideo" class="w-full max-h-[400px] object-contain" controls></video>
+                <img id="previewImage" class="hidden w-full max-h-[400px] object-contain" alt="Preview">
+            </div>
+            <div class="mt-4 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h3 id="previewAuthor" class="font-bold text-sm"></h3>
+                    <span id="previewPlatform" class="text-[10px] px-2 py-1 rounded-full bg-white/5 text-slate-400 border border-white/5"></span>
+                </div>
+                <p id="previewDesc" class="text-xs text-slate-400 line-clamp-2"></p>
+                
+                <!-- QUALITY SELECTOR -->
+                <div class="flex gap-2">
+                    <button onclick="downloadQuality('720p')" class="quality-badge">720p HD</button>
+                    <button onclick="downloadQuality('1080p')" class="quality-badge">1080p Full HD</button>
+                    <button onclick="downloadQuality('4K')" class="quality-badge">4K Ultra HD</button>
+                </div>
+                
+                <!-- ACTION BUTTONS -->
+                <div class="flex gap-2 pt-1">
+                    <button id="dlBtn" class="btn-primary flex-1 py-2.5 text-xs rounded-xl">
+                        <i class="fa-solid fa-download ml-1"></i> داونلۆد
+                    </button>
+                    <button id="audioBtn" class="bg-white/5 border border-white/5 text-white py-2.5 px-4 rounded-xl text-xs hover:bg-white/10 transition-all">
+                        <i class="fa-solid fa-music"></i>
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- PHOTO CARD -->
-        <div id="photoCard" class="hidden glass p-4 mb-5">
-            <h3 class="font-bold text-sm mb-3">📸 ئەلبومی وێنەکان</h3>
+        <div id="photoCard" class="hidden glass-card p-4 sm:p-5 mb-5">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-bold text-sm">📸 ئەلبومی وێنەکان</h3>
+                <button onclick="downloadAllPhotos()" class="text-[10px] bg-pink-500 text-white px-3 py-1 rounded-lg font-bold hover:bg-pink-600 transition-all">
+                    هەمووی دابەزێنە
+                </button>
+            </div>
             <div id="photoGrid" class="grid grid-cols-3 gap-2"></div>
         </div>
 
+        <!-- FEATURES -->
+        <div class="glass-card p-5 mb-5">
+            <h3 class="font-bold text-sm mb-4 text-center">🔥 بۆچی KRD-ProDown؟</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center hover:border-pink-500/20 transition-all">
+                    <i class="fa-solid fa-bolt text-pink-400 text-lg mb-1"></i>
+                    <p class="text-xs font-bold">خێرایی بەرز</p>
+                    <p class="text-[10px] text-slate-500">داونلۆدی ڕاستەوخۆ</p>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center hover:border-pink-500/20 transition-all">
+                    <i class="fa-solid fa-shield-halved text-violet-400 text-lg mb-1"></i>
+                    <p class="text-xs font-bold">بێ واتەرمارک</p>
+                    <p class="text-[10px] text-slate-500">ڤیدیۆی پاک</p>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center hover:border-pink-500/20 transition-all">
+                    <i class="fa-solid fa-globe text-sky-400 text-lg mb-1"></i>
+                    <p class="text-xs font-bold">٦+ پلاتفۆرم</p>
+                    <p class="text-[10px] text-slate-500">پشتگیری فراوان</p>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center hover:border-pink-500/20 transition-all">
+                    <i class="fa-solid fa-lock text-emerald-400 text-lg mb-1"></i>
+                    <p class="text-xs font-bold">پارێزراو</p>
+                    <p class="text-[10px] text-slate-500">بێ خەزنکردنی داتا</p>
+                </div>
+            </div>
+        </div>
+
         <!-- FOOTER -->
-        <footer class="text-center text-[10px] text-slate-600 py-4">
-            <p>© 2026 KrdDown | Zaniyar Al-Mzuri</p>
+        <footer class="text-center py-6">
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <div class="w-6 h-6 rounded-lg bg-gradient-to-br from-pink-500 to-violet-600 flex items-center justify-center">
+                    <i class="fa-solid fa-bolt text-white text-[8px]"></i>
+                </div>
+                <span class="text-sm font-bold text-white">KRD-<span class="text-pink-400">ProDown</span></span>
+            </div>
+            <p class="text-[10px] text-slate-600 mb-3">© 2026 KRD-ProDown | گەشەپێدەر Zaniyar Al-Mzuri Al-Kurdi</p>
+            <div class="flex justify-center gap-4">
+                <a href="https://t.me/z_14x" target="_blank" class="text-slate-600 hover:text-pink-400 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://instagram.com/z44nko" target="_blank" class="text-slate-600 hover:text-pink-400 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://tiktok.com/@z44nko" target="_blank" class="text-slate-600 hover:text-pink-400 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://snapchat.com/t/VmOzLBj3" target="_blank" class="text-slate-600 hover:text-pink-400 transition-colors"><i class="fa-brands fa-snapchat"></i></a>
+            </div>
         </footer>
     </main>
 
-    <script src="app.js"></script>
+    <script>
+        // ============================================
+        // KRD-ProDown - All Functions
+        // ============================================
+        let currentVideoUrl = '';
+        let albumImages = [];
+        let currentPlatform = '';
+
+        // ===== INIT =====
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('krdpro_theme') === 'light') {
+                document.body.classList.add('light-mode');
+                const icon = document.getElementById('themeIcon');
+                if (icon) icon.className = 'fa-solid fa-sun text-xs';
+            }
+        });
+
+        // ===== PLATFORM SELECTION =====
+        function selectPlatform(name) {
+            currentPlatform = name;
+            document.getElementById('welcomeModal').classList.remove('show');
+            setTimeout(() => {
+                const modal = document.getElementById('welcomeModal');
+                if (modal) modal.style.display = 'none';
+            }, 300);
+            toast('✅ ' + name + ' هەڵبژێردرا');
+        }
+
+        // ===== THEME =====
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('krdpro_theme', isLight ? 'light' : 'dark');
+            const icon = document.getElementById('themeIcon');
+            if (icon) icon.className = isLight ? 'fa-solid fa-sun text-xs' : 'fa-solid fa-moon text-xs';
+        }
+
+        // ===== TOAST =====
+        function toast(msg) {
+            const c = document.getElementById('toastContainer');
+            if (!c) return;
+            const t = document.createElement('div');
+            t.className = 'toast';
+            t.textContent = msg;
+            c.appendChild(t);
+            setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(100%)'; t.style.transition = 'all 0.3s ease'; setTimeout(() => t.remove(), 300); }, 2500);
+        }
+
+        // ===== PASTE =====
+        function pasteLink() {
+            if (!navigator.clipboard) return;
+            navigator.clipboard.readText().then(text => {
+                document.getElementById('videoUrl').value = text;
+                toast('📋 لینک پەیست کرا');
+            }).catch(() => toast('❌ ناتوانرێت پەیست بکرێت'));
+        }
+
+        // ===== FORCE DOWNLOAD =====
+        function forceDownload(url, name) {
+            if (!url) return toast('❌ هیچ لینکێک نییە');
+            window.open(url, '_blank');
+            toast('📥 داونلۆد دەستی پێکرد');
+        }
+
+        function downloadQuality(quality) {
+            if (!currentVideoUrl) return toast('⚠️ سەرەتا ڤیدیۆ بدۆزەرەوە');
+            toast('📥 کوالێتی ' + quality + ' داونلۆد دەکرێت...');
+            setTimeout(() => forceDownload(currentVideoUrl), 500);
+        }
+
+        function downloadAllPhotos() {
+            if (!albumImages.length) return toast('⚠️ هیچ وێنەیەک نییە');
+            albumImages.forEach((url, i) => {
+                setTimeout(() => forceDownload(url, 'photo_' + (i+1) + '.jpg'), i * 400);
+            });
+            toast('📸 هەموو وێنەکان داونلۆد دەکرێن');
+        }
+
+        // ===== MAIN DOWNLOAD =====
+        async function downloadVideo() {
+            const url = document.getElementById('videoUrl').value.trim();
+            if (!url) return toast('⚠️ تکایە لینکی ڤیدیۆ بنووسە');
+
+            const btn = document.getElementById('downloadBtn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin ml-2"></i> چاوەڕێ بە...';
+
+            // Hide previous results
+            document.getElementById('previewCard').classList.add('hidden');
+            document.getElementById('photoCard').classList.add('hidden');
+
+            try {
+                // Try TikTok API first (works for TikTok only)
+                if (url.includes('tiktok.com') || url.includes('vm.tiktok')) {
+                    const res = await fetch('https://www.tikwm.com/api/?url=' + encodeURIComponent(url));
+                    const data = await res.json();
+
+                    if (data.code === 0 && data.data) {
+                        const d = data.data;
+                        if (d.images && d.images.length > 0) {
+                            albumImages = d.images;
+                            showPhotos(d.images);
+                        } else {
+                            currentVideoUrl = d.play || d.hdplay || d.wmplay;
+                            showPreview({
+                                videoUrl: currentVideoUrl,
+                                audioUrl: d.music,
+                                author: d.author?.nickname || 'نەناسراو',
+                                title: d.title || '',
+                                platform: 'TikTok'
+                            });
+                        }
+                        toast('✅ سەرکەوتوو بوو!');
+                        btn.disabled = false;
+                        btn.innerHTML = originalText;
+                        return;
+                    }
+                }
+
+                // Try Cobalt API (for all other platforms)
+                const cRes = await fetch('https://api.cobalt.tools/api/json', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({ url: url, vQuality: '720', filenamePattern: 'basic' })
+                });
+                const cData = await cRes.json();
+
+                if (cData.status === 'redirect' || cData.status === 'stream' || cData.status === 'tunnel') {
+                    currentVideoUrl = cData.url;
+                    showPreview({
+                        videoUrl: cData.url,
+                        audioUrl: cData.url,
+                        author: 'ئامادەی داونلۆد',
+                        title: '',
+                        platform: currentPlatform || 'Video'
+                    });
+                    toast('✅ سەرکەوتوو بوو!');
+                } else if (cData.status === 'picker' && cData.picker && cData.picker.length > 0) {
+                    albumImages = cData.picker.map(i => i.url);
+                    showPhotos(albumImages);
+                    toast('✅ ئەلبومی وێنەکان ئامادەیە!');
+                } else {
+                    toast('❌ نەتوانرا داونلۆد بکرێت. لینکەکە دڵنیابەوە دروستە');
+                }
+            } catch(e) {
+                toast('❌ کێشەیەک ڕوویدا، تکایە دووبارە هەوڵبدە');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        }
+
+        // ===== SHOW PREVIEW =====
+        function showPreview(data) {
+            const card = document.getElementById('previewCard');
+            card.classList.remove('hidden');
+            
+            const video = document.getElementById('previewVideo');
+            const image = document.getElementById('previewImage');
+            
+            video.classList.remove('hidden');
+            image.classList.add('hidden');
+            video.src = data.videoUrl;
+            
+            document.getElementById('previewAuthor').textContent = data.author;
+            document.getElementById('previewDesc').textContent = data.title;
+            document.getElementById('previewPlatform').textContent = data.platform;
+            
+            document.getElementById('dlBtn').onclick = () => forceDownload(data.videoUrl);
+            document.getElementById('audioBtn').onclick = () => forceDownload(data.audioUrl);
+            
+            card.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===== SHOW PHOTOS =====
+        function showPhotos(images) {
+            const card = document.getElementById('photoCard');
+            card.classList.remove('hidden');
+            
+            const grid = document.getElementById('photoGrid');
+            grid.innerHTML = images.map((url, i) =>
+                `<div class="relative group rounded-xl overflow-hidden aspect-square bg-slate-800">
+                    <img src="https://images.weserv.nl/?url=${encodeURIComponent(url)}" class="w-full h-full object-cover" loading="lazy" alt="Photo ${i+1}">
+                    <button onclick="forceDownload('${url}')" class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all text-white text-xs font-bold">
+                        <i class="fa-solid fa-download ml-1"></i> داونلۆد
+                    </button>
+                </div>`
+            ).join('');
+            
+            card.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
