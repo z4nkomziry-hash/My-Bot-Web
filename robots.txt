@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /temp/
+
+# Crawl-delay: 10
+Sitemap: https://krddown.vercel.app/sitemap.xml
+
+# Block specific bots (optional)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
