@@ -1,21 +1,55 @@
-# Environment variables
+# ===== Environment =====
 .env
 .env.local
-.env.*
+.env.production
+.env.*.local
 
-# Python
+# ===== Node.js =====
+node_modules/
+dist/
+build/
+*.log
+npm-debug.log*
+
+# ===== Python =====
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
-__pycache__
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+venv/
+env/
 
-# IDE
+# ===== IDE =====
 .vscode/
 .idea/
-
-# OS
+*.swp
+*.swo
+*~
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
+# ===== Prisma =====
+prisma/migrations/*/migration_lock.toml
+
+# ===== Coverage =====
+coverage/
+.nyc_output/
+
+# ===== Docker =====
+.docker/
+
+# ===== Secrets =====
+*_secret*
+*_token*
+credentials.json
+service-account.json
+
+# ===== Vercel =====
+.vercel
+
+# ===== Railway =====
+.railway
