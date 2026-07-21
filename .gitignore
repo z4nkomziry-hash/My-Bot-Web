@@ -1,55 +1,40 @@
-# ===== Environment =====
+# Environment
 .env
 .env.local
 .env.production
 .env.*.local
 
-# ===== Node.js =====
+# Node.js
 node_modules/
 dist/
 build/
 *.log
-npm-debug.log*
 
-# ===== Python =====
+# Python
 __pycache__/
 *.py[cod]
 *.pyo
-*.pyd
 .Python
 *.so
 *.egg
-*.egg-info/
 venv/
 env/
 
-# ===== IDE =====
+# IDE
 .vscode/
 .idea/
 *.swp
-*.swo
-*~
 .DS_Store
 Thumbs.db
 
-# ===== Prisma =====
-prisma/migrations/*/migration_lock.toml
-
-# ===== Coverage =====
+# Coverage
 coverage/
-.nyc_output/
 
-# ===== Docker =====
+# Docker
 .docker/
 
-# ===== Secrets =====
-*_secret*
-*_token*
-credentials.json
-service-account.json
-
-# ===== Vercel =====
+# Vercel
 .vercel
 
-# ===== Railway =====
+# Railway
 .railway
