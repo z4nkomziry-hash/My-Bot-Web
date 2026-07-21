@@ -17,10 +17,6 @@
     <meta property="og:description" content="Download videos, stories, reels in high quality without watermark">
     <meta property="og:image" content="https://krd-prodown.vercel.app/icon.png">
     
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="KRD-ProDown | Video Downloader">
-    <meta name="twitter:image" content="https://krd-prodown.vercel.app/icon.png">
-    
     <title>KRD-ProDown | Download Social Media Videos Without Watermark</title>
     
     <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
@@ -30,7 +26,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7926552217625654" crossorigin="anonymous"></script>
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
@@ -41,34 +36,22 @@
         
         :root {
             --bg-primary: #090d16;
-            --bg-secondary: #0f172a;
-            --bg-card: rgba(255, 255, 255, 0.025);
-            --border-color: rgba(255, 255, 255, 0.05);
-            --border-hover: rgba(255, 255, 255, 0.10);
-            --text-primary: #f1f5f9;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.18);
+            --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --accent-rose: #f43f5e;
-            --accent-pink: #ec4899;
-            --accent-violet: #a855f7;
-            --accent-amber: #f59e0b;
-            --accent-emerald: #10b981;
-            --accent-cyan: #06b6d4;
-            --radius-sm: 10px;
             --radius-md: 16px;
-            --radius-lg: 20px;
             --radius-xl: 24px;
         }
 
         .light-mode {
             --bg-primary: #f8fafc;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(15, 23, 42, 0.02);
-            --border-color: rgba(15, 23, 42, 0.06);
-            --border-hover: rgba(15, 23, 42, 0.10);
+            --bg-card: rgba(15, 23, 42, 0.03);
+            --border-color: rgba(15, 23, 42, 0.08);
+            --border-hover: rgba(15, 23, 42, 0.18);
             --text-primary: #0f172a;
             --text-secondary: #475569;
-            --text-muted: #94a3b8;
         }
 
         body {
@@ -76,15 +59,14 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
-            transition: background 0.4s ease, color 0.4s ease;
-            line-height: 1.7;
+            transition: background 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
+            -webkit-tap-highlight-color: transparent;
         }
 
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #ec4899, #a855f7); border-radius: 10px; }
 
-        /* Glass Card */
         .glass-card {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -92,113 +74,109 @@
             border: 1px solid var(--border-color);
             border-radius: var(--radius-xl);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(236,72,153,0.3), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .glass-card:hover::before { opacity: 1; }
         .glass-card:hover { border-color: var(--border-hover); }
 
-        /* Buttons */
         .btn-gradient {
             background: linear-gradient(135deg, #f43f5e, #ec4899, #a855f7);
             color: #fff;
             font-weight: 700;
             border: none;
             cursor: pointer;
-            border-radius: var(--radius-lg);
-            padding: 16px 28px;
-            box-shadow: 0 4px 25px rgba(236, 72, 153, 0.25);
+            border-radius: var(--radius-md);
+            padding: 14px 24px;
+            box-shadow: 0 4px 20px rgba(236, 72, 153, 0.3);
             transition: all 0.3s ease;
         }
-        .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(236, 72, 153, 0.45); }
+        .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(236, 72, 153, 0.45); }
         .btn-gradient:active { transform: translateY(0); }
-        .btn-gradient:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
         .btn-tab {
-            padding: 10px 20px;
-            border-radius: var(--radius-md);
+            padding: 10px 22px;
+            border-radius: 14px;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-color);
             color: var(--text-secondary);
         }
-        .btn-tab:hover { background: rgba(255, 255, 255, 0.06); color: var(--text-primary); }
-        .btn-tab.active { background: linear-gradient(135deg, #ec4899, #a855f7); color: #fff; border-color: transparent; }
+        .btn-tab.active {
+            background: linear-gradient(135deg, #ec4899, #a855f7);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+        }
 
-        .input-field {
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 16px 120px 16px 50px;
-            color: var(--text-primary);
-            width: 100%;
-            font-size: 14px;
-            font-family: inherit;
+            border-radius: 18px;
+            padding: 6px;
             transition: all 0.3s ease;
         }
-        .input-field:focus { outline: none; border-color: #ec4899; }
-        .input-field::placeholder { color: var(--text-muted); }
+        .input-wrapper:focus-within {
+            border-color: #ec4899;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.2);
+        }
+
+        .input-field {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 14px;
+            font-family: inherit;
+        }
 
         .modal-overlay {
             display: flex;
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(14px);
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease;
         }
         .modal-overlay.show { opacity: 1; pointer-events: auto; }
-        .modal-content { transform: scale(0.85); transition: all 0.3s ease; }
-        .modal-overlay.show .modal-content { transform: scale(1); }
 
         .toast-container { position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
-        .toast { background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.08); padding: 14px 18px; border-radius: var(--radius-md); color: #fff; font-size: 13px; font-weight: 600; animation: slideIn 0.35s ease; backdrop-filter: blur(20px); pointer-events: auto; }
-        @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes ledPulse { 0%,100%{opacity:0.4;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.2)} }
-        @keyframes serverGlow { 0%,100%{transform:scale(1);box-shadow:0 0 8px rgba(16,185,129,0.2)} 50%{transform:scale(1.03);box-shadow:0 0 16px rgba(16,185,129,0.5)} }
-        .server-badge { animation: serverGlow 2.5s infinite ease-in-out; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.25); backdrop-filter: blur(8px); }
-        .led-dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #10b981,0 0 20px #10b981; animation: ledPulse 1.6s infinite ease-in-out; }
-        .rotate-180 { transform: rotate(180deg); }
+        .toast { background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.12); padding: 12px 20px; border-radius: 14px; color: #fff; font-size: 13px; font-weight: 700; backdrop-filter: blur(20px); pointer-events: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        /* PLATFORM BRAND COLORS */
-        .platform-tiktok { background: #000; border: 1px solid #ff0050; color: #fff; }
-        .platform-tiktok:hover { background: #ff0050; color: #fff; border-color: #ff0050; box-shadow: 0 0 25px rgba(255,0,80,0.3); }
-        .platform-instagram { background: #000; border: 1px solid #e1306c; color: #fff; }
-        .platform-instagram:hover { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: #fff; border-color: transparent; box-shadow: 0 0 25px rgba(225,48,108,0.3); }
-        .platform-snapchat { background: #000; border: 2px solid #fffc00; color: #fffc00; }
-        .platform-snapchat:hover { background: #fffc00; color: #000; border-color: #fffc00; box-shadow: 0 0 25px rgba(255,252,0,0.4); }
-        .platform-facebook { background: #000; border: 1px solid #1877f2; color: #fff; }
-        .platform-facebook:hover { background: #1877f2; color: #fff; border-color: #1877f2; box-shadow: 0 0 25px rgba(24,119,242,0.3); }
-        .platform-pinterest { background: #000; border: 1px solid #e60023; color: #fff; }
-        .platform-pinterest:hover { background: #e60023; color: #fff; border-color: #e60023; box-shadow: 0 0 25px rgba(230,0,35,0.3); }
-        .platform-btn { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: var(--radius-md); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 100%; text-align: right; }
+        .server-badge {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            backdrop-filter: blur(8px);
+        }
+        .led-dot {
+            width: 8px; height: 8px; background: #10b981; border-radius: 50%;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulse 1.8s infinite ease-in-out;
+        }
+        @keyframes pulse { 0%,100%{opacity:0.4;transform:scale(0.9)} 50%{opacity:1;transform:scale(1.2)} }
 
-        .dev-card { background: rgba(15,23,42,0.6); border: 1px solid rgba(168,85,247,0.4); box-shadow: 0 0 15px rgba(168,85,247,0.15); transition: all 0.3s ease; }
-        .dev-card:hover { box-shadow: 0 0 25px rgba(168,85,247,0.4),0 0 25px rgba(59,130,246,0.4); border-color: #a855f7; }
-        .glow-avatar { box-shadow: 0 0 20px rgba(168,85,247,0.5),0 0 40px rgba(236,72,153,0.3); animation: avatarGlow 2s infinite ease-in-out; }
-        @keyframes avatarGlow { 0%,100%{box-shadow:0 0 20px rgba(168,85,247,0.5)} 50%{box-shadow:0 0 35px rgba(236,72,153,0.7)} }
+        .platform-btn {
+            display: flex; align-items: center; justify-content: flex-start; gap: 12px;
+            padding: 12px 18px; border-radius: 14px; font-size: 14px; font-weight: 700;
+            cursor: pointer; transition: all 0.25s ease; width: 100%; text-align: right;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); color: #fff;
+        }
+        .platform-btn:hover { background: rgba(255,255,255,0.08); transform: translateY(-1px); }
 
-        @media (max-width: 640px) {
-            .input-field { padding: 14px 100px 14px 40px; font-size: 13px; }
-            .btn-gradient { padding: 14px 20px; font-size: 13px; }
-            .platform-btn { padding: 12px 14px; font-size: 13px; }
+        .dev-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.1);
         }
     </style>
 </head>
@@ -208,345 +186,167 @@
 
 <!-- Welcome Modal -->
 <div id="welcomeModal" class="modal-overlay show">
-    <div class="modal-content glass-card w-[90%] max-w-[480px] p-6 text-center max-h-[85vh] overflow-y-auto">
-        <div class="text-5xl mb-3">🚀</div>
-        <h2 class="text-xl font-black mb-1" id="welcomeTitle">بەخێربێیت بۆ KRD-ProDown</h2>
-        <p class="text-xs text-slate-400 mb-5" id="welcomeSubtitle">کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟</p>
+    <div class="glass-card w-[92%] max-w-[420px] p-6 text-center max-h-[85vh] overflow-y-auto">
+        <div class="text-4xl mb-3">🚀</div>
+        <h2 class="text-xl font-black mb-1">بەخێربێیت بۆ KRD-ProDown</h2>
+        <p class="text-xs text-slate-400 mb-5">کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟</p>
         <div class="space-y-2.5">
-            <button onclick="selectPlatform('TikTok')" class="platform-btn platform-tiktok"><i class="fa-brands fa-tiktok text-lg"></i> TikTok</button>
-            <button onclick="selectPlatform('Instagram')" class="platform-btn platform-instagram"><i class="fa-brands fa-instagram text-lg"></i> Instagram</button>
-            <button onclick="selectPlatform('Snapchat')" class="platform-btn platform-snapchat"><i class="fa-brands fa-snapchat text-lg"></i> Snapchat</button>
-            <button onclick="selectPlatform('Facebook')" class="platform-btn platform-facebook"><i class="fa-brands fa-facebook text-lg"></i> Facebook</button>
-            <button onclick="selectPlatform('Pinterest')" class="platform-btn platform-pinterest"><i class="fa-brands fa-pinterest text-lg"></i> Pinterest</button>
+            <button onclick="selectPlatform('TikTok')" class="platform-btn hover:border-rose-500"><i class="fa-brands fa-tiktok text-rose-500 text-lg"></i> TikTok</button>
+            <button onclick="selectPlatform('Instagram')" class="platform-btn hover:border-pink-500"><i class="fa-brands fa-instagram text-pink-500 text-lg"></i> Instagram</button>
+            <button onclick="selectPlatform('Snapchat')" class="platform-btn hover:border-yellow-400"><i class="fa-brands fa-snapchat text-yellow-400 text-lg"></i> Snapchat</button>
+            <button onclick="selectPlatform('Facebook')" class="platform-btn hover:border-blue-500"><i class="fa-brands fa-facebook text-blue-500 text-lg"></i> Facebook</button>
+            <button onclick="selectPlatform('Pinterest')" class="platform-btn hover:border-red-500"><i class="fa-brands fa-pinterest text-red-500 text-lg"></i> Pinterest</button>
         </div>
     </div>
 </div>
 
 <!-- Header -->
-<header class="border-b border-white/[0.03] py-3 px-4 sticky top-0 z-40 bg-[#090d16]/85 backdrop-blur-2xl">
-    <div class="max-w-3xl mx-auto flex justify-between items-center">
-        <a href="/" class="flex items-center gap-2.5">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-violet-600 flex items-center justify-center shadow-lg shadow-rose-500/20">
-                <i class="fa-solid fa-bolt text-white text-sm"></i>
+<header class="border-b border-white/[0.05] py-3 px-4 sticky top-0 z-40 bg-[#090d16]/90 backdrop-blur-2xl">
+    <div class="max-w-2xl mx-auto flex justify-between items-center">
+        <a href="/" class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-500 to-violet-600 flex items-center justify-center shadow-lg shadow-rose-500/20">
+                <i class="fa-solid fa-bolt text-white text-xs"></i>
             </div>
-            <span class="text-xl font-extrabold"><span class="text-white">KRD-</span><span class="bg-gradient-to-r from-rose-400 to-violet-400 bg-clip-text text-transparent">ProDown</span></span>
+            <span class="text-lg font-black tracking-tight"><span class="text-white">KRD-</span><span class="bg-gradient-to-r from-rose-400 to-violet-400 bg-clip-text text-transparent">ProDown</span></span>
         </a>
         <div class="flex items-center gap-2">
-            <span class="server-badge text-[10px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-2 text-slate-200">
-                <span class="led-dot"></span>Server: <span class="text-emerald-400" id="onlineText">Online</span>
+            <span class="server-badge text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-2 text-slate-200">
+                <span class="led-dot"></span>Server: <span class="text-emerald-400">Online</span>
             </span>
-            <select id="langSelect" onchange="changeLanguage(this.value)" class="text-[10px] bg-white/[0.03] border border-white/[0.06] text-slate-400 rounded-lg px-2 py-1.5 focus:outline-none cursor-pointer">
-                <option value="badini">کوردی (بادینی)</option>
-                <option value="sorani">کوردی (سۆرانی)</option>
+            <select id="langSelect" onchange="changeLanguage(this.value)" class="text-[11px] bg-white/[0.05] border border-white/10 text-slate-300 rounded-xl px-2.5 py-1.5 focus:outline-none cursor-pointer">
+                <option value="badini">بادینی</option>
+                <option value="sorani">سۆرانی</option>
                 <option value="ar">العربية</option>
                 <option value="en">English</option>
             </select>
-            <button onclick="toggleTheme()" class="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-slate-400 hover:text-white transition-all">
+            <button onclick="toggleTheme()" class="w-8 h-8 rounded-xl bg-white/[0.05] border border-white/10 flex items-center justify-center text-slate-300 hover:text-white transition-all">
                 <i id="themeIcon" class="fa-solid fa-moon text-xs"></i>
             </button>
         </div>
     </div>
 </header>
 
-<main class="max-w-3xl mx-auto px-4 py-8">
+<main class="max-w-2xl mx-auto px-4 py-6">
     
-    <!-- Ad Block -->
-    <div class="mb-5 flex justify-center overflow-hidden rounded-2xl bg-white/[0.02] border border-white/[0.04] p-1">
-        <div class="h-[60px] w-full max-w-[728px] bg-white/[0.01] flex items-center justify-center text-[11px] text-slate-600 font-semibold">
-            <i class="fa-solid fa-ad ml-2 text-slate-700"></i> <span id="adText">KRD-ProDown Advertisement Block</span>
-        </div>
-    </div>
-
     <!-- Dynamic Title -->
     <div class="text-center mb-6">
-        <h1 class="text-2xl sm:text-3xl font-extrabold leading-tight mb-2" id="mainTitle">
+        <h1 class="text-xl sm:text-2xl font-black leading-snug mb-2">
             Download Social Media Videos & Stories Without Watermark
         </h1>
-        <button onclick="toggleGuide()" class="mt-2 text-xs font-bold text-rose-400 hover:text-rose-300 flex items-center justify-center gap-1.5 mx-auto cursor-pointer bg-rose-500/8 px-4 py-2 rounded-full transition-all">
-            <i class="fa-solid fa-circle-play"></i> <span id="guideBtnText">How to download media?</span>
+        <button onclick="toggleGuide()" class="mt-1 text-xs font-bold text-rose-400 hover:text-rose-300 inline-flex items-center gap-1.5 bg-rose-500/10 px-3.5 py-1.5 rounded-full transition-all">
+            <i class="fa-solid fa-circle-play"></i> <span>دێ چەوا میدیا دابەزێنم؟</span>
         </button>
         <div id="guideBox" class="hidden glass-card p-4 mt-3 text-right">
-            <div class="flex items-center gap-2 mb-3 border-b border-white/5 pb-2">
+            <div class="flex items-center gap-2 mb-2 border-b border-white/5 pb-2">
                 <i class="fa-solid fa-circle-info text-rose-400"></i>
-                <span class="text-xs font-bold" id="guideTitle">Quick Download Guide</span>
+                <span class="text-xs font-bold">Quick Download Guide</span>
             </div>
-            <ol class="text-xs text-slate-400 space-y-2 pr-4">
-                <li id="guideStep1">Copy the video link from any social media app</li>
-                <li id="guideStep2">Paste the link in the input field above</li>
-                <li id="guideStep3">Click the Download button and save your media</li>
+            <ol class="text-xs text-slate-400 space-y-1.5 pr-4">
+                <li>Copy the video link from any social media app</li>
+                <li>Paste the link in the input field above</li>
+                <li>Click the Download button and save your media</li>
             </ol>
         </div>
     </div>
 
     <!-- Main Converter Card -->
-    <div class="glass-card p-5 sm:p-6 mb-5">
+    <div class="glass-card p-4 sm:p-6 mb-5">
         <div class="flex gap-2 justify-center mb-4">
-            <button onclick="switchMode('link')" id="modeLink" class="btn-tab active"><i class="fa-solid fa-link ml-1.5"></i> <span id="tabLink">URL Link</span></button>
-            <button onclick="switchMode('username')" id="modeUsername" class="btn-tab"><i class="fa-solid fa-at ml-1.5"></i> <span id="tabUsername">Username</span></button>
+            <button onclick="switchMode('link')" id="modeLink" class="btn-tab active"><i class="fa-solid fa-link ml-1.5"></i> <span>URL Link</span></button>
+            <button onclick="switchMode('username')" id="modeUsername" class="btn-tab"><i class="fa-solid fa-at ml-1.5"></i> <span>Username</span></button>
         </div>
-        <div class="relative">
-            <i class="fa-solid fa-link absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm z-10"></i>
+        
+        <div class="input-wrapper">
             <input type="text" id="videoUrl" placeholder="Paste video link here..." class="input-field" autocomplete="off">
-            <button onclick="clearInput()" id="clearBtn" class="hidden absolute left-24 top-1/2 -translate-y-1/2 text-rose-400 hover:text-rose-300 text-sm z-10">
+            <button onclick="clearInput()" id="clearBtn" class="hidden text-rose-400 px-2 text-sm">
                 <i class="fa-solid fa-circle-xmark"></i>
             </button>
-            <button onclick="pasteLink()" class="absolute left-3 top-1/2 -translate-y-1/2 text-xs bg-white/[0.05] hover:bg-white/[0.10] border border-white/[0.06] text-slate-300 px-3 py-2 rounded-xl transition-all flex items-center gap-1.5 z-10">
-                <i class="fa-solid fa-paste text-[10px]"></i> <span id="pasteText">Paste</span>
+            <button onclick="pasteLink()" class="text-xs bg-white/[0.08] hover:bg-white/15 text-white font-bold px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 shrink-0">
+                <i class="fa-solid fa-paste text-[10px]"></i> <span>پەیست</span>
             </button>
         </div>
-        <div id="platformBadge" class="hidden mt-2 text-[10px] text-slate-400 text-center font-bold"></div>
+
         <button id="downloadBtn" onclick="downloadVideo()" class="btn-gradient w-full mt-4 text-sm flex items-center justify-center gap-2">
-            <i class="fa-solid fa-download"></i> <span id="downloadText">Download</span> ↓
+            <i class="fa-solid fa-download"></i> <span>دابەزێنە</span>
         </button>
-        <div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-white/[0.04]">
-            <button onclick="shareToSnapchat()" class="flex items-center justify-center gap-2 py-3 rounded-2xl font-bold text-sm transition-all" style="background:#fffc00;color:#000;" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 20px rgba(255,252,0,0.4)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-                <i class="fa-brands fa-snapchat text-lg"></i> <span id="snapShare">Snapchat Share</span>
-            </button>
-            <button onclick="shareToTelegram()" class="flex items-center justify-center gap-2 py-3 rounded-2xl font-bold text-sm transition-all" style="background:#0088cc;color:#fff;" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 20px rgba(0,136,204,0.4)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-                <i class="fa-brands fa-telegram text-lg"></i> <span id="tgShare">Telegram Share</span>
-            </button>
-        </div>
-    </div>
 
-    <!-- Preview Card -->
-    <div id="previewCard" class="hidden glass-card p-4 sm:p-5 mb-5">
-        <div class="relative bg-black rounded-xl overflow-hidden">
-            <video id="previewVideo" class="w-full max-h-[400px] object-contain" controls></video>
-            <img id="previewImage" class="hidden w-full max-h-[400px] object-contain" alt="Preview">
+        <div class="grid grid-cols-2 gap-2.5 mt-4 pt-4 border-t border-white/[0.05]">
+            <button onclick="shareToSnapchat()" class="flex items-center justify-center gap-2 py-2.5 rounded-xl font-bold text-xs transition-all bg-yellow-400 text-black hover:bg-yellow-300">
+                <i class="fa-brands fa-snapchat text-base"></i> <span>Snapchat Share</span>
+            </button>
+            <button onclick="shareToTelegram()" class="flex items-center justify-center gap-2 py-2.5 rounded-xl font-bold text-xs transition-all bg-sky-500 text-white hover:bg-sky-400">
+                <i class="fa-brands fa-telegram text-base"></i> <span>Telegram Share</span>
+            </button>
         </div>
-        <div class="mt-4 space-y-3">
-            <div class="flex items-center justify-between"><h3 id="previewAuthor" class="font-bold text-sm"></h3><span id="previewPlatform" class="text-[10px] px-2 py-1 rounded-full bg-white/[0.03] text-slate-400 border border-white/[0.05]"></span></div>
-            <p id="previewDesc" class="text-xs text-slate-400 line-clamp-2"></p>
-            <div class="flex gap-2">
-                <button onclick="downloadQuality('720p')" class="text-[10px] bg-white/[0.03] border border-white/[0.05] px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-all">720p</button>
-                <button onclick="downloadQuality('1080p')" class="text-[10px] bg-white/[0.03] border border-white/[0.05] px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-all">1080p</button>
-                <button onclick="downloadQuality('4K')" class="text-[10px] bg-white/[0.03] border border-white/[0.05] px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-all">4K</button>
-                <button onclick="extractAudio()" class="text-[10px] bg-amber-500/8 border border-amber-500/20 px-3 py-1.5 rounded-lg text-amber-400 hover:bg-amber-500/15 transition-all">MP3</button>
-            </div>
-            <div class="flex gap-2 pt-1">
-                <button id="dlBtn" class="btn-gradient flex-1 py-2.5 text-xs rounded-xl"><i class="fa-solid fa-download ml-1.5"></i> <span id="dlBtnText">Fast Download</span></button>
-                <button id="audioBtn" class="bg-white/[0.03] border border-white/[0.06] text-white py-2.5 px-4 rounded-xl text-xs hover:bg-white/[0.06] transition-all"><i class="fa-solid fa-music"></i> <span id="audioBtnText">MP3 Audio</span></button>
-                <button id="copyBtn" class="bg-white/[0.03] border border-white/[0.06] text-white py-2.5 px-4 rounded-xl text-xs hover:bg-white/[0.06] transition-all" onclick="copyVideoLink()"><i class="fa-solid fa-copy"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Photo Card -->
-    <div id="photoCard" class="hidden glass-card p-4 sm:p-5 mb-5">
-        <div class="flex justify-between items-center mb-3"><h3 class="font-bold text-sm" id="albumTitle">📸 Photo Album</h3><button onclick="downloadAllPhotos()" class="text-[10px] bg-rose-500 text-white px-3 py-1 rounded-lg font-bold hover:bg-rose-600 transition-all" id="dlAllText">Download All</button></div>
-        <div id="photoGrid" class="grid grid-cols-3 gap-2"></div>
     </div>
 
     <!-- Developer Card -->
-    <div class="dev-card p-5 mb-5 rounded-3xl text-right">
-        <div class="flex items-center gap-4 mb-3">
-            <img src="icon.png" class="w-16 h-16 rounded-2xl glow-avatar border-2 border-violet-500/50 object-cover" alt="Zaniyar" onerror="this.style.display='none'">
+    <div class="glass-card dev-card p-4 sm:p-5 mb-5 rounded-2xl text-right">
+        <div class="flex items-center gap-3">
+            <img src="icon.png" class="w-12 h-12 rounded-xl border border-violet-500/40 object-cover" alt="Zaniyar" onerror="this.style.display='none'">
             <div class="flex-1">
-                <h4 class="text-sm font-black text-violet-400">Zaniyar Al-Mzuri 🚀</h4>
-                <p class="text-[11px] text-slate-400 leading-relaxed mt-1">پەرەپێدەر و دیزاینەری KRD-ProDown | ئامانج: خێراترین و باشترین داونلۆدەری جیهان</p>
+                <h4 class="text-xs font-black text-violet-400">Zaniyar Al-Mzuri 🚀</h4>
+                <p class="text-[11px] text-slate-400 leading-normal mt-0.5">پەرەپێدەر و دیزاینەری KRD-ProDown | ئامانج: خێراترین و باشترین داونلۆدەری جیهان</p>
             </div>
         </div>
-        <div class="grid grid-cols-5 gap-2 mt-3 pt-3 border-t border-white/[0.04]">
-            <a href="https://t.me/z_14x" target="_blank" class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] hover:bg-[#0088cc] hover:text-white transition-all text-slate-400 text-[10px]"><i class="fa-brands fa-telegram text-lg"></i>Telegram</a>
-            <a href="https://tiktok.com/@z44nko" target="_blank" class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] hover:bg-[#ff0050] hover:text-white transition-all text-slate-400 text-[10px]"><i class="fa-brands fa-tiktok text-lg"></i>TikTok</a>
-            <a href="https://instagram.com/z44nko" target="_blank" class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] hover:bg-[#e1306c] hover:text-white transition-all text-slate-400 text-[10px]"><i class="fa-brands fa-instagram text-lg"></i>Instagram</a>
-            <a href="https://snapchat.com/t/VmOzLBj3" target="_blank" class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] hover:bg-[#fffc00] hover:text-black transition-all text-slate-400 text-[10px]"><i class="fa-brands fa-snapchat text-lg"></i>Snapchat</a>
-            <a href="https://www.threads.com/@zaniyar_dildar" target="_blank" class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] hover:bg-white hover:text-black transition-all text-slate-400 text-[10px]"><i class="fa-brands fa-threads text-lg"></i>Threads</a>
+        <div class="grid grid-cols-5 gap-1.5 mt-3 pt-3 border-t border-white/[0.05]">
+            <a href="https://t.me/z_14x" target="_blank" class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] hover:bg-[#0088cc] hover:text-white transition-all text-slate-400 text-[10px]"><i class="fa-brands fa-telegram text-base"></i>Telegram</a>
+            <a href="https://tiktok.com/@z44nko" target="_blank" class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] hover:bg-[#ff0050] hover:text-white transition-all text-slate-400 text-[10px]"><i class="fa-brands fa-tiktok text-base"></i>TikTok</a>
+            <a href="https://instagram.com/z44nko" target="_blank" class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] hover:bg-[#e1306c] hover:text-white transition-all text-slate-400 text-[10px]"><i class="fa-brands fa-instagram text-base"></i>Instagram</a>
+            <a href="https://snapchat.com/t/VmOzLBj3" target="_blank" class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] hover:bg-[#fffc00] hover:text-black transition-all text-slate-400 text-[10px]"><i class="fa-brands fa-snapchat text-base"></i>Snapchat</a>
+            <a href="https://www.threads.com/@zaniyar_dildar" target="_blank" class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] hover:bg-white hover:text-black transition-all text-slate-400 text-[10px]"><i class="fa-brands fa-threads text-base"></i>Threads</a>
         </div>
     </div>
 
     <!-- Support Section -->
-    <div class="glass-card p-5 sm:p-6 mb-5 text-center">
-        <button onclick="toggleSupport()" class="w-full flex items-center justify-between text-white font-bold text-sm">
-            <span class="flex items-center gap-2"><i class="fa-solid fa-heart text-rose-400"></i> <span id="supportTitle">Your Support Me 💎</span></span>
+    <div class="glass-card p-4 mb-5 text-center">
+        <button onclick="toggleSupport()" class="w-full flex items-center justify-between text-white font-bold text-xs">
+            <span class="flex items-center gap-2"><i class="fa-solid fa-heart text-rose-400"></i> <span>Your Support Me 💎</span></span>
             <i id="supportArrow" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
         </button>
-        <div id="supportDropdown" class="hidden mt-4 space-y-3">
-            <div class="grid gap-3">
-                <div class="flex items-center justify-between bg-white/[0.02] border border-white/5 rounded-2xl p-4">
-                    <div class="flex items-center gap-3"><i class="fa-solid fa-building-columns text-violet-400 text-xl"></i><div class="text-right"><p class="text-xs font-bold text-white">FIB</p><code class="text-[11px] text-violet-400">+964 750 604 5491</code></div></div>
-                    <button onclick="copyToClipboard('+964 750 604 5491')" class="text-[10px] bg-violet-500/20 text-violet-400 hover:bg-violet-500/30 px-3 py-1.5 rounded-lg transition-all"><i class="fa-solid fa-copy ml-1"></i> Copy</button>
-                </div>
-                <div class="flex items-center justify-between bg-white/[0.02] border border-white/5 rounded-2xl p-4">
-                    <div class="flex items-center gap-3"><i class="fa-solid fa-bolt text-pink-400 text-xl"></i><div class="text-right"><p class="text-xs font-bold text-white">FastPay</p><code class="text-[11px] text-pink-400">+964 750 604 5491</code></div></div>
-                    <button onclick="copyToClipboard('+964 750 604 5491')" class="text-[10px] bg-pink-500/20 text-pink-400 hover:bg-pink-500/30 px-3 py-1.5 rounded-lg transition-all"><i class="fa-solid fa-copy ml-1"></i> Copy</button>
-                </div>
-                <div class="flex items-center justify-between bg-white/[0.02] border border-white/5 rounded-2xl p-4">
-                    <div class="flex items-center gap-3"><i class="fa-brands fa-bitcoin text-amber-400 text-xl"></i><div class="text-right"><p class="text-xs font-bold text-white">USDT (TRC20)</p><code class="text-[10px] text-amber-400 break-all">TKUfVwnjyT2KUa9xnBreT32YLLJEwACHpc</code></div></div>
-                    <button onclick="copyToClipboard('TKUfVwnjyT2KUa9xnBreT32YLLJEwACHpc')" class="text-[10px] bg-amber-500/20 text-amber-400 hover:bg-amber-500/30 px-3 py-1.5 rounded-lg transition-all"><i class="fa-solid fa-copy ml-1"></i> Copy</button>
-                </div>
+        <div id="supportDropdown" class="hidden mt-3 space-y-2">
+            <div class="flex items-center justify-between bg-white/[0.02] border border-white/5 rounded-xl p-3">
+                <div class="flex items-center gap-2.5"><i class="fa-solid fa-building-columns text-violet-400 text-lg"></i><div class="text-right"><p class="text-xs font-bold text-white">FIB</p><code class="text-[11px] text-violet-400">+964 750 604 5491</code></div></div>
+                <button onclick="copyToClipboard('+964 750 604 5491')" class="text-[10px] bg-violet-500/20 text-violet-400 px-2.5 py-1 rounded-lg"><i class="fa-solid fa-copy ml-1"></i> Copy</button>
+            </div>
+            <div class="flex items-center justify-between bg-white/[0.02] border border-white/5 rounded-xl p-3">
+                <div class="flex items-center gap-2.5"><i class="fa-solid fa-bolt text-pink-400 text-lg"></i><div class="text-right"><p class="text-xs font-bold text-white">FastPay</p><code class="text-[11px] text-pink-400">+964 750 604 5491</code></div></div>
+                <button onclick="copyToClipboard('+964 750 604 5491')" class="text-[10px] bg-pink-500/20 text-pink-400 px-2.5 py-1 rounded-lg"><i class="fa-solid fa-copy ml-1"></i> Copy</button>
             </div>
         </div>
     </div>
 
     <!-- Contact Section -->
-    <div class="glass-card p-5 sm:p-6 mb-5">
-        <a href="https://t.me/z_14x" target="_blank" class="w-full flex items-center justify-center gap-3 py-4 rounded-2xl font-bold text-white transition-all" style="background: linear-gradient(135deg, #0088cc, #24a1de);" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 8px 30px rgba(0,136,204,0.4)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-            <i class="fa-brands fa-telegram text-xl"></i> <span id="contactText">Contact Us on Telegram</span>
+    <div class="glass-card p-3 mb-5">
+        <a href="https://t.me/z_14x" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-xs text-white bg-sky-600 hover:bg-sky-500 transition-all">
+            <i class="fa-brands fa-telegram text-lg"></i> <span>Contact Us on Telegram</span>
         </a>
     </div>
 
     <!-- Footer -->
-    <footer class="text-center py-6">
-        <div class="flex items-center justify-center gap-2 mb-2">
-            <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-rose-500 to-violet-600 flex items-center justify-center"><i class="fa-solid fa-bolt text-white text-[10px]"></i></div>
-            <span class="text-sm font-bold text-white">KRD-<span class="text-rose-400">ProDown</span></span>
-        </div>
-        <p class="text-[10px] text-slate-600" id="footerText">© 2026 KRD-ProDown | Developed by Zaniyar Al-Mzuri Al-Kurdi</p>
+    <footer class="text-center py-4">
+        <p class="text-[11px] text-slate-500">© 2026 KRD-ProDown | گەشەپێدەر Zaniyar Al-Mzuri Al-Kurdi</p>
     </footer>
 </main>
 
 <script>
-// ============================================
-// KRD-ProDown - Fixed Script
-// ============================================
-let currentVideoUrl = '', currentPlatform = '', currentMode = 'link', currentLang = 'badini';
-
-// ===== TRANSLATIONS =====
-const LANG = {
-    badini: {
-        welcomeTitle: 'بەخێربێیت بۆ KRD-ProDown', welcomeSubtitle: 'کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟',
-        mainTitle: 'Download Social Media Videos & Stories Without Watermark',
-        guideBtn: 'دێ چەوا میدیا دابەزێنم؟', guideTitle: 'ڕێبەرێ دابەزاندنێ',
-        guideStep1: 'لینکی ڤیدیۆکە لە تۆڕی کۆمەڵایەتی کۆپی بکە',
-        guideStep2: 'لینکەکە لە کادری سەرەوە دابنێ',
-        guideStep3: 'کلیک لە دوگمەی دابەزێنە بکە',
-        tabLink: 'URL Link', tabUsername: 'Username',
-        paste: 'پەیست', download: 'دابەزێنە',
-        snapShare: 'Snapchat Share', tgShare: 'Telegram Share',
-        dlBtnText: 'داونلۆدا بلەز', audioBtnText: 'MP3 دەنگ',
-        albumTitle: '📸 ئەلبومی وێنەکان', dlAllText: 'هەمووی دابەزێنە',
-        supportTitle: 'Your Support Me 💎',
-        contactText: 'Contact Us on Telegram',
-        footerText: '© 2026 KRD-ProDown | گەشەپێدەر Zaniyar Al-Mzuri Al-Kurdi',
-        online: 'Online', adText: 'KRD-ProDown Advertisement Block',
-        success: '✅ سەرکەوتوو بوو!', error: '❌ کێشەیەک ڕوویدا',
-        noUrl: '⚠️ تکایە لینکی ڤیدیۆ بنووسە', waiting: '⏳ چاوەڕێ بە...',
-        copied: '📋 کۆپی کرا', pasted: '📋 لینک پەیست کرا',
-        audioReady: '🎵 دەنگ ئامادەیە!', albumReady: '✅ ئەلبوم ئامادەیە!'
-    },
-    sorani: {
-        welcomeTitle: 'بەخێربێیت بۆ KRD-ProDown', welcomeSubtitle: 'کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟',
-        mainTitle: 'Download Social Media Videos & Stories Without Watermark',
-        guideBtn: 'چۆن میدیا دابگرم؟', guideTitle: 'ڕێبەری داگرتن',
-        guideStep1: 'لینکی ڤیدیۆکە لە تۆڕی کۆمەڵایەتی کۆپی بکە',
-        guideStep2: 'لینکەکە لە کادری سەرەوە دابنێ',
-        guideStep3: 'کلیک لە دوگمەی دابەزێنە بکە',
-        tabLink: 'URL Link', tabUsername: 'Username',
-        paste: 'پەیست بکە', download: 'دایبەزێنە',
-        snapShare: 'Snapchat Share', tgShare: 'Telegram Share',
-        dlBtnText: 'داگرتنی خێرا', audioBtnText: 'دەنگی MP3',
-        albumTitle: '📸 ئەلبومی وێنەکان', dlAllText: 'هەمووی دابگرە',
-        supportTitle: 'Your Support Me 💎',
-        contactText: 'Contact Us on Telegram',
-        footerText: '© 2026 KRD-ProDown | گەشەپێدەر Zaniyar Al-Mzuri Al-Kurdi',
-        online: 'Online', adText: 'KRD-ProDown Advertisement Block',
-        success: '✅ سەرکەوتوو بوو!', error: '❌ کێشەیەک ڕوویدا',
-        noUrl: '⚠️ تکایە لینکی ڤیدیۆ بنووسە', waiting: '⏳ چاوەڕێ بە...',
-        copied: '📋 کۆپی کرا', pasted: '📋 لینک پەیست کرا',
-        audioReady: '🎵 دەنگ ئامادەیە!', albumReady: '✅ ئەلبوم ئامادەیە!'
-    },
-    ar: {
-        welcomeTitle: 'مرحباً بك في KRD-ProDown', welcomeSubtitle: 'اختر منصة التواصل الاجتماعي',
-        mainTitle: 'تحميل فيديوهات وقصص بدون علامة مائية',
-        guideBtn: 'كيف يمكنني تحميل الوسائط؟', guideTitle: 'دليل التحميل السريع',
-        guideStep1: 'انسخ رابط الفيديو من التطبيق', guideStep2: 'ضع الرابط في الحقل أعلاه', guideStep3: 'انقر على زر التحميل',
-        tabLink: 'رابط URL', tabUsername: 'اسم المستخدم',
-        paste: 'لصق', download: 'تحميل',
-        snapShare: 'مشاركة سناب شات', tgShare: 'مشاركة تيليجرام',
-        dlBtnText: 'تحميل سريع', audioBtnText: 'صوت MP3',
-        albumTitle: '📸 ألبوم الصور', dlAllText: 'تحميل الكل',
-        supportTitle: 'Your Support Me 💎',
-        contactText: 'Contact Us on Telegram',
-        footerText: '© 2026 KRD-ProDown | المطور زانيار المزوري',
-        online: 'متصل', adText: 'KRD-ProDown Advertisement Block',
-        success: '✅ تم بنجاح!', error: '❌ حدث خطأ',
-        noUrl: '⚠️ الرجاء إدخال رابط', waiting: '⏳ انتظر...',
-        copied: '📋 تم النسخ', pasted: '📋 تم اللصق',
-        audioReady: '🎵 الصوت جاهز!', albumReady: '✅ الألبوم جاهز!'
-    },
-    en: {
-        welcomeTitle: 'Welcome to KRD-ProDown', welcomeSubtitle: 'Choose your social media platform',
-        mainTitle: 'Download Social Media Videos & Stories Without Watermark',
-        guideBtn: 'How to download media?', guideTitle: 'Quick Download Guide',
-        guideStep1: 'Copy the video link from any social media app', guideStep2: 'Paste the link in the input field above', guideStep3: 'Click the Download button and save your media',
-        tabLink: 'URL Link', tabUsername: 'Username',
-        paste: 'Paste', download: 'Download',
-        snapShare: 'Snapchat Share', tgShare: 'Telegram Share',
-        dlBtnText: 'Fast Download', audioBtnText: 'MP3 Audio',
-        albumTitle: '📸 Photo Album', dlAllText: 'Download All',
-        supportTitle: 'Your Support Me 💎',
-        contactText: 'Contact Us on Telegram',
-        footerText: '© 2026 KRD-ProDown | Developed by Zaniyar Al-Mzuri Al-Kurdi',
-        online: 'Online', adText: 'KRD-ProDown Advertisement Block',
-        success: '✅ Success!', error: '❌ Error occurred',
-        noUrl: '⚠️ Please enter a video link', waiting: '⏳ Processing...',
-        copied: '📋 Copied', pasted: '📋 Link pasted',
-        audioReady: '🎵 Audio ready!', albumReady: '✅ Album ready!'
-    }
-};
-
-function t(key) { return LANG[currentLang]?.[key] || LANG['en'][key] || key; }
-
-// ===== INIT =====
 window.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('krdpro_lang');
-    if (savedLang) {
-        currentLang = savedLang;
-        document.getElementById('langSelect').value = savedLang;
-    }
-    updateAllTexts();
-    if (localStorage.getItem('krdpro_theme') === 'light') {
-        document.body.classList.add('light-mode');
-        document.getElementById('themeIcon').className = 'fa-solid fa-sun text-xs';
-    }
-    setTimeout(() => document.getElementById('welcomeModal').classList.add('show'), 500);
+    setTimeout(() => document.getElementById('welcomeModal').classList.add('show'), 300);
     const input = document.getElementById('videoUrl');
     input.addEventListener('input', () => {
         document.getElementById('clearBtn').classList.toggle('hidden', !input.value.trim());
-        detectPlatform();
     });
 });
-
-function updateAllTexts() {
-    const ids = ['welcomeTitle', 'welcomeSubtitle', 'mainTitle', 'guideBtnText', 'guideTitle', 'guideStep1', 'guideStep2', 'guideStep3', 'tabLink', 'tabUsername', 'pasteText', 'downloadText', 'snapShare', 'tgShare', 'dlBtnText', 'audioBtnText', 'albumTitle', 'dlAllText', 'supportTitle', 'contactText', 'footerText', 'onlineText', 'adText'];
-    ids.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = t(id);
-    });
-}
-
-function changeLanguage(lang) {
-    currentLang = lang;
-    localStorage.setItem('krdpro_lang', lang);
-    updateAllTexts();
-    toast('✅ Language: ' + lang);
-}
 
 function toggleTheme() {
     document.body.classList.toggle('light-mode');
     const isLight = document.body.classList.contains('light-mode');
-    localStorage.setItem('krdpro_theme', isLight ? 'light' : 'dark');
     document.getElementById('themeIcon').className = isLight ? 'fa-solid fa-sun text-xs' : 'fa-solid fa-moon text-xs';
 }
 
 function selectPlatform(n) {
-    currentPlatform = n;
     document.getElementById('welcomeModal').classList.remove('show');
-    setTimeout(() => document.getElementById('welcomeModal').style.display = 'none', 300);
-    updateTitleForPlatform(n);
     toast('✅ ' + n + ' selected');
-}
-
-function updateTitleForPlatform(p) {
-    const titles = {
-        TikTok: 'Download TikTok Videos & Stories Without Watermark',
-        Instagram: 'Download Instagram Reels & Stories Without Watermark',
-        Snapchat: 'Download Snapchat Stories & Spotlight Without Watermark',
-        Facebook: 'Download Facebook Videos & Reels Without Watermark',
-        Pinterest: 'Download Pinterest Videos & Images Without Watermark'
-    };
-    document.getElementById('mainTitle').textContent = titles[p] || t('mainTitle');
 }
 
 function toast(m) {
@@ -555,38 +355,20 @@ function toast(m) {
     el.className = 'toast';
     el.textContent = m;
     c.appendChild(el);
-    setTimeout(() => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateX(120%)';
-        el.style.transition = '0.3s';
-        setTimeout(() => el.remove(), 300);
-    }, 2500);
+    setTimeout(() => el.remove(), 2500);
 }
 
 function pasteLink() {
     navigator.clipboard.readText().then(text => {
         document.getElementById('videoUrl').value = text;
         document.getElementById('clearBtn').classList.remove('hidden');
-        detectPlatform();
-        toast(t('pasted'));
+        toast('📋 لینک پەیست کرا');
     }).catch(() => {});
 }
 
 function clearInput() {
     document.getElementById('videoUrl').value = '';
     document.getElementById('clearBtn').classList.add('hidden');
-    document.getElementById('platformBadge').classList.add('hidden');
-}
-
-function copyVideoLink() {
-    if (!currentVideoUrl) return;
-    navigator.clipboard.writeText(currentVideoUrl);
-    toast(t('copied'));
-}
-
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text);
-    toast(t('copied'));
 }
 
 function toggleGuide() {
@@ -599,221 +381,19 @@ function toggleSupport() {
 }
 
 function switchMode(m) {
-    currentMode = m;
     document.getElementById('modeLink').classList.toggle('active', m === 'link');
     document.getElementById('modeUsername').classList.toggle('active', m === 'username');
 }
 
-function shareToSnapchat() {
-    window.open('https://www.snapchat.com/scan?attachmentUrl=' + encodeURIComponent(location.href), '_blank');
-}
-
-function shareToTelegram() {
-    window.open('https://t.me/share/url?url=' + encodeURIComponent(location.href), '_blank');
-}
-
-function downloadQuality(q) {
-    if (!currentVideoUrl) return;
-    const a = document.createElement('a');
-    a.href = currentVideoUrl;
-    a.download = 'KRD-ProDown_' + q + '.mp4';
-    a.target = '_blank';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-}
-
-function downloadSinglePhoto(url, index) {
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'KRD-ProDown_' + (index + 1) + '.jpg';
-    a.target = '_blank';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-}
-
-function downloadAllPhotos() {
-    const btns = document.querySelectorAll('#photoGrid button');
-    btns.forEach(b => b.click());
-}
-
-function detectPlatform() {
-    const u = document.getElementById('videoUrl').value.trim();
-    const b = document.getElementById('platformBadge');
-    if (!u) {
-        b.classList.add('hidden');
-        return;
-    }
-    const p = {
-        'tiktok.com': '🎵 TikTok',
-        'instagram.com': '📸 Instagram',
-        'youtube.com': '▶️ YouTube',
-        'facebook.com': '📘 Facebook',
-        'snapchat.com': '👻 Snapchat',
-        'pinterest.com': '📌 Pinterest'
-    };
-    for (const [d, n] of Object.entries(p)) {
-        if (u.includes(d)) {
-            b.classList.remove('hidden');
-            b.textContent = '🔍 ' + n;
-            currentPlatform = n;
-            return;
-        }
-    }
-    b.classList.add('hidden');
-}
-
-async function extractAudio() {
-    const url = document.getElementById('videoUrl').value.trim();
-    if (!url) return toast(t('noUrl'));
-    try {
-        const r = await fetch('https://api.cobalt.tools/api/json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ url, isAudioOnly: true, aFormat: 'mp3' })
-        });
-        const d = await r.json();
-        if (d.url) {
-            const a = document.createElement('a');
-            a.href = d.url;
-            a.download = 'KRD-ProDown_Audio.mp3';
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            toast(t('audioReady'));
-        }
-    } catch (e) {
-        toast(t('error'));
-    }
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+    toast('📋 کۆپی کرا');
 }
 
 async function downloadVideo() {
     const url = document.getElementById('videoUrl').value.trim();
-    if (!url) return toast(t('noUrl'));
-    const btn = document.getElementById('downloadBtn');
-    const orig = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin ml-2"></i> ' + t('waiting');
-    
-    document.getElementById('previewCard').classList.add('hidden');
-    document.getElementById('photoCard').classList.add('hidden');
-    
-    try {
-        let result = null;
-        if (url.includes('tiktok.com') || url.includes('vm.tiktok')) {
-            const r = await fetch('https://www.tikwm.com/api/?url=' + encodeURIComponent(url));
-            const d = await r.json();
-            if (d.code === 0 && d.data) {
-                const v = d.data;
-                if (v.images && v.images.length > 0) {
-                    result = { images: v.images, platform: 'TikTok' };
-                } else {
-                    const vu = v.hdplay || v.play || v.wmplay;
-                    if (vu) {
-                        result = {
-                            videoUrl: vu,
-                            audioUrl: v.music || v.music_info?.url,
-                            author: v.author?.nickname || 'TikTok',
-                            title: v.title || '',
-                            platform: 'TikTok'
-                        };
-                    }
-                }
-            }
-        }
-        
-        if (!result) {
-            const r = await fetch('https://api.cobalt.tools/api/json', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({ url, vQuality: '1080', filenamePattern: 'basic', isAudioOnly: false })
-            });
-            const d = await r.json();
-            if (d.url || d.status === 'redirect' || d.status === 'stream' || d.status === 'tunnel') {
-                result = {
-                    videoUrl: d.url,
-                    audioUrl: d.url,
-                    author: currentPlatform || 'Media',
-                    title: '',
-                    platform: currentPlatform || 'Video'
-                };
-            } else if (d.status === 'picker' && d.picker && d.picker.length > 0) {
-                result = { images: d.picker.map(i => i.url), platform: 'Album' };
-            }
-        }
-        
-        if (result) {
-            if (result.images) {
-                showPhotos(result.images);
-                toast(t('albumReady'));
-            } else {
-                currentVideoUrl = result.videoUrl;
-                showPreview(result);
-                toast(t('success'));
-            }
-        } else {
-            toast('❌ Download failed');
-        }
-    } catch (e) {
-        toast(t('error'));
-    }
-    
-    btn.disabled = false;
-    btn.innerHTML = orig;
-}
-
-function showPreview(d) {
-    document.getElementById('previewCard').classList.remove('hidden');
-    document.getElementById('previewVideo').src = d.videoUrl;
-    document.getElementById('previewVideo').load();
-    document.getElementById('previewAuthor').textContent = d.author;
-    document.getElementById('previewPlatform').textContent = d.platform;
-    document.getElementById('previewDesc').textContent = d.title;
-    
-    document.getElementById('dlBtn').onclick = () => {
-        const a = document.createElement('a');
-        a.href = d.videoUrl;
-        a.download = 'KRD-ProDown.mp4';
-        a.target = '_blank';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    };
-    
-    document.getElementById('audioBtn').onclick = () => {
-        const a = document.createElement('a');
-        a.href = d.audioUrl;
-        a.download = 'KRD-ProDown.mp3';
-        a.target = '_blank';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    };
-    
-    document.getElementById('previewCard').scrollIntoView({ behavior: 'smooth' });
-}
-
-function showPhotos(imgs) {
-    document.getElementById('photoCard').classList.remove('hidden');
-    const container = document.getElementById('photoGrid');
-    container.innerHTML = '';
-    
-    imgs.forEach((u, i) => {
-        const item = document.createElement('div');
-        item.className = 'relative group rounded-xl overflow-hidden aspect-square bg-slate-800';
-        item.innerHTML = `
-            <img src="https://images.weserv.nl/?url=${encodeURIComponent(u)}" class="w-full h-full object-cover" loading="lazy">
-            <button class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 text-white text-xs font-bold transition-all">
-                <i class="fa-solid fa-download ml-1"></i>
-            </button>
-        `;
-        item.querySelector('button').addEventListener('click', () => downloadSinglePhoto(u, i));
-        container.appendChild(item);
-    });
-    
-    document.getElementById('photoCard').scrollIntoView({ behavior: 'smooth' });
+    if (!url) return toast('⚠️ تکایە لینکی ڤیدیۆ بنووسە');
+    toast('⏳ چاوەڕێ بە...');
 }
 </script>
 </body>
