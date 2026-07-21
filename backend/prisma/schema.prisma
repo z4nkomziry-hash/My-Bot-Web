@@ -1,0 +1,166 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String
+  email         String?        @unique
+  password      String?
+  avatar        String?
+  role          String         @default("user")
+  emailVerified Boolean        @default(false)
+  oauthProvider String?
+  oauthId       String?
+  downloads     Int            @default(0)
+  points        Int            @default(0)
+  level         String         @default("bronze")
+  refreshToken  String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  
+  subscriptions  Subscription[]
+  downloads_     Download[]
+  favorites      Favorite[]
+  collections    Collection[]
+  notifications  Notification[]
+  sessions       Session[]
+  auditLogs      AuditLog[]
+  emailTokens    EmailToken[]
+}
+
+model EmailToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  type      String
+  expiresAt DateTime
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  token        String   @unique
+  refreshToken String?
+  ip           String?
+  userAgent    String?
+  expiresAt    DateTime
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+}
+
+model Download {
+  id        String   @id @default(cuid())
+  url       String
+  platform  String?
+  quality   String?
+  type      String   @default("video")
+  title     String?
+  thumbnail String?
+  fileSize  Int?
+  createdAt DateTime @default(now())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  url       String
+  title     String?
+  platform  String?
+  thumbnail String?
+  collectionId String?
+  collection   Collection? @relation(fields: [collectionId], references: [id])
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Collection {
+  id        String     @id @default(cuid())
+  name      String
+  icon      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  favorites Favorite[]
+}
+
+model Subscription {
+  id            String   @id @default(cuid())
+  plan          String   @default("free")
+  status        String   @default("active")
+  startsAt      DateTime @default(now())
+  endsAt        DateTime?
+  trialEndsAt   DateTime?
+  cancelledAt   DateTime?
+  stripeSubId   String?
+  stripeCustId  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  type      String   @default("info")
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  action     String
+  resource   String
+  resourceId String?
+  details    String?
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  name      String
+  requests  Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  expiresAt DateTime?
+}
+
+model RateLimit {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  points    Int      @default(0)
+  expireAt  DateTime
+  createdAt DateTime @default(now())
+}
+
+enum Plan {
+  free
+  plus
+  premium
+}
+
+enum SubscriptionStatus {
+  active
+  cancelled
+  expired
+  trialing
+}
