@@ -398,178 +398,422 @@
 
 <script>
 // ============================================
-// KRD-ProDown - Complete Script
+// KRD-ProDown - Fixed Script
 // ============================================
-let currentVideoUrl='',currentPlatform='',currentMode='link',currentLang='badini';
+let currentVideoUrl = '', currentPlatform = '', currentMode = 'link', currentLang = 'badini';
 
 // ===== TRANSLATIONS =====
-const LANG={
-    badini:{
-        welcomeTitle:'بەخێربێیت بۆ KRD-ProDown',welcomeSubtitle:'کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟',
-        mainTitle:'Download Social Media Videos & Stories Without Watermark',
-        guideBtn:'دێ چەوا میدیا دابەزێنم؟',guideTitle:'ڕێبەرێ دابەزاندنێ',
-        guideStep1:'لینکی ڤیدیۆکە لە تۆڕی کۆمەڵایەتی کۆپی بکە',
-        guideStep2:'لینکەکە لە کادری سەرەوە دابنێ',
-        guideStep3:'کلیک لە دوگمەی دابەزێنە بکە',
-        tabLink:'URL Link',tabUsername:'Username',
-        paste:'پەیست',download:'دابەزێنە',
-        snapShare:'Snapchat Share',tgShare:'Telegram Share',
-        dlBtnText:'داونلۆدا بلەز',audioBtnText:'MP3 دەنگ',
-        albumTitle:'📸 ئەلبومی وێنەکان',dlAllText:'هەمووی دابەزێنە',
-        supportTitle:'Your Support Me 💎',
-        contactText:'Contact Us on Telegram',
-        footerText:'© 2026 KRD-ProDown | گەشەپێدەر Zaniyar Al-Mzuri Al-Kurdi',
-        online:'Online',adText:'KRD-ProDown Advertisement Block',
-        success:'✅ سەرکەوتوو بوو!',error:'❌ کێشەیەک ڕوویدا',
-        noUrl:'⚠️ تکایە لینکی ڤیدیۆ بنووسە',waiting:'⏳ چاوەڕێ بە...',
-        copied:'📋 کۆپی کرا',pasted:'📋 لینک پەیست کرا',
-        audioReady:'🎵 دەنگ ئامادەیە!',albumReady:'✅ ئەلبوم ئامادەیە!'
+const LANG = {
+    badini: {
+        welcomeTitle: 'بەخێربێیت بۆ KRD-ProDown', welcomeSubtitle: 'کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟',
+        mainTitle: 'Download Social Media Videos & Stories Without Watermark',
+        guideBtn: 'دێ چەوا میدیا دابەزێنم؟', guideTitle: 'ڕێبەرێ دابەزاندنێ',
+        guideStep1: 'لینکی ڤیدیۆکە لە تۆڕی کۆمەڵایەتی کۆپی بکە',
+        guideStep2: 'لینکەکە لە کادری سەرەوە دابنێ',
+        guideStep3: 'کلیک لە دوگمەی دابەزێنە بکە',
+        tabLink: 'URL Link', tabUsername: 'Username',
+        paste: 'پەیست', download: 'دابەزێنە',
+        snapShare: 'Snapchat Share', tgShare: 'Telegram Share',
+        dlBtnText: 'داونلۆدا بلەز', audioBtnText: 'MP3 دەنگ',
+        albumTitle: '📸 ئەلبومی وێنەکان', dlAllText: 'هەمووی دابەزێنە',
+        supportTitle: 'Your Support Me 💎',
+        contactText: 'Contact Us on Telegram',
+        footerText: '© 2026 KRD-ProDown | گەشەپێدەر Zaniyar Al-Mzuri Al-Kurdi',
+        online: 'Online', adText: 'KRD-ProDown Advertisement Block',
+        success: '✅ سەرکەوتوو بوو!', error: '❌ کێشەیەک ڕوویدا',
+        noUrl: '⚠️ تکایە لینکی ڤیدیۆ بنووسە', waiting: '⏳ چاوەڕێ بە...',
+        copied: '📋 کۆپی کرا', pasted: '📋 لینک پەیست کرا',
+        audioReady: '🎵 دەنگ ئامادەیە!', albumReady: '✅ ئەلبوم ئامادەیە!'
     },
-    sorani:{
-        welcomeTitle:'بەخێربێیت بۆ KRD-ProDown',welcomeSubtitle:'کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟',
-        mainTitle:'Download Social Media Videos & Stories Without Watermark',
-        guideBtn:'چۆن میدیا دابگرم؟',guideTitle:'ڕێبەری داگرتن',
-        guideStep1:'لینکی ڤیدیۆکە لە تۆڕی کۆمەڵایەتی کۆپی بکە',
-        guideStep2:'لینکەکە لە کادری سەرەوە دابنێ',
-        guideStep3:'کلیک لە دوگمەی دابەزێنە بکە',
-        tabLink:'URL Link',tabUsername:'Username',
-        paste:'پەیست بکە',download:'دایبەزێنە',
-        snapShare:'Snapchat Share',tgShare:'Telegram Share',
-        dlBtnText:'داگرتنی خێرا',audioBtnText:'دەنگی MP3',
-        albumTitle:'📸 ئەلبومی وێنەکان',dlAllText:'هەمووی دابگرە',
-        supportTitle:'Your Support Me 💎',
-        contactText:'Contact Us on Telegram',
-        footerText:'© 2026 KRD-ProDown | گەشەپێدەر Zaniyar Al-Mzuri Al-Kurdi',
-        online:'Online',adText:'KRD-ProDown Advertisement Block',
-        success:'✅ سەرکەوتوو بوو!',error:'❌ کێشەیەک ڕوویدا',
-        noUrl:'⚠️ تکایە لینکی ڤیدیۆ بنووسە',waiting:'⏳ چاوەڕێ بە...',
-        copied:'📋 کۆپی کرا',pasted:'📋 لینک پەیست کرا',
-        audioReady:'🎵 دەنگ ئامادەیە!',albumReady:'✅ ئەلبوم ئامادەیە!'
+    sorani: {
+        welcomeTitle: 'بەخێربێیت بۆ KRD-ProDown', welcomeSubtitle: 'کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟',
+        mainTitle: 'Download Social Media Videos & Stories Without Watermark',
+        guideBtn: 'چۆن میدیا دابگرم؟', guideTitle: 'ڕێبەری داگرتن',
+        guideStep1: 'لینکی ڤیدیۆکە لە تۆڕی کۆمەڵایەتی کۆپی بکە',
+        guideStep2: 'لینکەکە لە کادری سەرەوە دابنێ',
+        guideStep3: 'کلیک لە دوگمەی دابەزێنە بکە',
+        tabLink: 'URL Link', tabUsername: 'Username',
+        paste: 'پەیست بکە', download: 'دایبەزێنە',
+        snapShare: 'Snapchat Share', tgShare: 'Telegram Share',
+        dlBtnText: 'داگرتنی خێرا', audioBtnText: 'دەنگی MP3',
+        albumTitle: '📸 ئەلبومی وێنەکان', dlAllText: 'هەمووی دابگرە',
+        supportTitle: 'Your Support Me 💎',
+        contactText: 'Contact Us on Telegram',
+        footerText: '© 2026 KRD-ProDown | گەشەپێدەر Zaniyar Al-Mzuri Al-Kurdi',
+        online: 'Online', adText: 'KRD-ProDown Advertisement Block',
+        success: '✅ سەرکەوتوو بوو!', error: '❌ کێشەیەک ڕوویدا',
+        noUrl: '⚠️ تکایە لینکی ڤیدیۆ بنووسە', waiting: '⏳ چاوەڕێ بە...',
+        copied: '📋 کۆپی کرا', pasted: '📋 لینک پەیست کرا',
+        audioReady: '🎵 دەنگ ئامادەیە!', albumReady: '✅ ئەلبوم ئامادەیە!'
     },
-    ar:{
-        welcomeTitle:'مرحباً بك في KRD-ProDown',welcomeSubtitle:'اختر منصة التواصل الاجتماعي',
-        mainTitle:'تحميل فيديوهات وقصص بدون علامة مائية',
-        guideBtn:'كيف يمكنني تحميل الوسائط؟',guideTitle:'دليل التحميل السريع',
-        guideStep1:'انسخ رابط الفيديو من التطبيق',guideStep2:'ضع الرابط في الحقل أعلاه',guideStep3:'انقر على زر التحميل',
-        tabLink:'رابط URL',tabUsername:'اسم المستخدم',
-        paste:'لصق',download:'تحميل',
-        snapShare:'مشاركة سناب شات',tgShare:'مشاركة تيليجرام',
-        dlBtnText:'تحميل سريع',audioBtnText:'صوت MP3',
-        albumTitle:'📸 ألبوم الصور',dlAllText:'تحميل الكل',
-        supportTitle:'Your Support Me 💎',
-        contactText:'Contact Us on Telegram',
-        footerText:'© 2026 KRD-ProDown | المطور زانيار المزوري',
-        online:'متصل',adText:'KRD-ProDown Advertisement Block',
-        success:'✅ تم بنجاح!',error:'❌ حدث خطأ',
-        noUrl:'⚠️ الرجاء إدخال رابط',waiting:'⏳ انتظر...',
-        copied:'📋 تم النسخ',pasted:'📋 تم اللصق',
-        audioReady:'🎵 الصوت جاهز!',albumReady:'✅ الألبوم جاهز!'
+    ar: {
+        welcomeTitle: 'مرحباً بك في KRD-ProDown', welcomeSubtitle: 'اختر منصة التواصل الاجتماعي',
+        mainTitle: 'تحميل فيديوهات وقصص بدون علامة مائية',
+        guideBtn: 'كيف يمكنني تحميل الوسائط؟', guideTitle: 'دليل التحميل السريع',
+        guideStep1: 'انسخ رابط الفيديو من التطبيق', guideStep2: 'ضع الرابط في الحقل أعلاه', guideStep3: 'انقر على زر التحميل',
+        tabLink: 'رابط URL', tabUsername: 'اسم المستخدم',
+        paste: 'لصق', download: 'تحميل',
+        snapShare: 'مشاركة سناب شات', tgShare: 'مشاركة تيليجرام',
+        dlBtnText: 'تحميل سريع', audioBtnText: 'صوت MP3',
+        albumTitle: '📸 ألبوم الصور', dlAllText: 'تحميل الكل',
+        supportTitle: 'Your Support Me 💎',
+        contactText: 'Contact Us on Telegram',
+        footerText: '© 2026 KRD-ProDown | المطور زانيار المزوري',
+        online: 'متصل', adText: 'KRD-ProDown Advertisement Block',
+        success: '✅ تم بنجاح!', error: '❌ حدث خطأ',
+        noUrl: '⚠️ الرجاء إدخال رابط', waiting: '⏳ انتظر...',
+        copied: '📋 تم النسخ', pasted: '📋 تم اللصق',
+        audioReady: '🎵 الصوت جاهز!', albumReady: '✅ الألبوم جاهز!'
     },
-    en:{
-        welcomeTitle:'Welcome to KRD-ProDown',welcomeSubtitle:'Choose your social media platform',
-        mainTitle:'Download Social Media Videos & Stories Without Watermark',
-        guideBtn:'How to download media?',guideTitle:'Quick Download Guide',
-        guideStep1:'Copy the video link from any social media app',guideStep2:'Paste the link in the input field above',guideStep3:'Click the Download button and save your media',
-        tabLink:'URL Link',tabUsername:'Username',
-        paste:'Paste',download:'Download',
-        snapShare:'Snapchat Share',tgShare:'Telegram Share',
-        dlBtnText:'Fast Download',audioBtnText:'MP3 Audio',
-        albumTitle:'📸 Photo Album',dlAllText:'Download All',
-        supportTitle:'Your Support Me 💎',
-        contactText:'Contact Us on Telegram',
-        footerText:'© 2026 KRD-ProDown | Developed by Zaniyar Al-Mzuri Al-Kurdi',
-        online:'Online',adText:'KRD-ProDown Advertisement Block',
-        success:'✅ Success!',error:'❌ Error occurred',
-        noUrl:'⚠️ Please enter a video link',waiting:'⏳ Processing...',
-        copied:'📋 Copied',pasted:'📋 Link pasted',
-        audioReady:'🎵 Audio ready!',albumReady:'✅ Album ready!'
+    en: {
+        welcomeTitle: 'Welcome to KRD-ProDown', welcomeSubtitle: 'Choose your social media platform',
+        mainTitle: 'Download Social Media Videos & Stories Without Watermark',
+        guideBtn: 'How to download media?', guideTitle: 'Quick Download Guide',
+        guideStep1: 'Copy the video link from any social media app', guideStep2: 'Paste the link in the input field above', guideStep3: 'Click the Download button and save your media',
+        tabLink: 'URL Link', tabUsername: 'Username',
+        paste: 'Paste', download: 'Download',
+        snapShare: 'Snapchat Share', tgShare: 'Telegram Share',
+        dlBtnText: 'Fast Download', audioBtnText: 'MP3 Audio',
+        albumTitle: '📸 Photo Album', dlAllText: 'Download All',
+        supportTitle: 'Your Support Me 💎',
+        contactText: 'Contact Us on Telegram',
+        footerText: '© 2026 KRD-ProDown | Developed by Zaniyar Al-Mzuri Al-Kurdi',
+        online: 'Online', adText: 'KRD-ProDown Advertisement Block',
+        success: '✅ Success!', error: '❌ Error occurred',
+        noUrl: '⚠️ Please enter a video link', waiting: '⏳ Processing...',
+        copied: '📋 Copied', pasted: '📋 Link pasted',
+        audioReady: '🎵 Audio ready!', albumReady: '✅ Album ready!'
     }
 };
-function t(key){return LANG[currentLang]?.[key]||LANG['en'][key]||key}
+
+function t(key) { return LANG[currentLang]?.[key] || LANG['en'][key] || key; }
 
 // ===== INIT =====
-window.addEventListener('DOMContentLoaded',()=>{
-    const savedLang=localStorage.getItem('krdpro_lang');
-    if(savedLang){currentLang=savedLang;document.getElementById('langSelect').value=savedLang}
+window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('krdpro_lang');
+    if (savedLang) {
+        currentLang = savedLang;
+        document.getElementById('langSelect').value = savedLang;
+    }
     updateAllTexts();
-    if(localStorage.getItem('krdpro_theme')==='light'){document.body.classList.add('light-mode');document.getElementById('themeIcon').className='fa-solid fa-sun text-xs'}
-    setTimeout(()=>document.getElementById('welcomeModal').classList.add('show'),500);
-    const input=document.getElementById('videoUrl');
-    input.addEventListener('input',()=>{document.getElementById('clearBtn').classList.toggle('hidden',!input.value.trim());detectPlatform()});
+    if (localStorage.getItem('krdpro_theme') === 'light') {
+        document.body.classList.add('light-mode');
+        document.getElementById('themeIcon').className = 'fa-solid fa-sun text-xs';
+    }
+    setTimeout(() => document.getElementById('welcomeModal').classList.add('show'), 500);
+    const input = document.getElementById('videoUrl');
+    input.addEventListener('input', () => {
+        document.getElementById('clearBtn').classList.toggle('hidden', !input.value.trim());
+        detectPlatform();
+    });
 });
 
-function updateAllTexts(){
-    const ids=['welcomeTitle','welcomeSubtitle','mainTitle','guideBtnText','guideTitle','guideStep1','guideStep2','guideStep3','tabLink','tabUsername','pasteText','downloadText','snapShare','tgShare','dlBtnText','audioBtnText','albumTitle','dlAllText','supportTitle','contactText','footerText','onlineText','adText'];
-    ids.forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=t(id)});
+function updateAllTexts() {
+    const ids = ['welcomeTitle', 'welcomeSubtitle', 'mainTitle', 'guideBtnText', 'guideTitle', 'guideStep1', 'guideStep2', 'guideStep3', 'tabLink', 'tabUsername', 'pasteText', 'downloadText', 'snapShare', 'tgShare', 'dlBtnText', 'audioBtnText', 'albumTitle', 'dlAllText', 'supportTitle', 'contactText', 'footerText', 'onlineText', 'adText'];
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t(id);
+    });
 }
 
-function changeLanguage(lang){currentLang=lang;localStorage.setItem('krdpro_lang',lang);updateAllTexts();toast('✅ Language: '+lang)}
-function toggleTheme(){document.body.classList.toggle('light-mode');const l=document.body.classList.contains('light-mode');localStorage.setItem('krdpro_theme',l?'light':'dark');document.getElementById('themeIcon').className=l?'fa-solid fa-sun text-xs':'fa-solid fa-moon text-xs'}
-function selectPlatform(n){currentPlatform=n;document.getElementById('welcomeModal').classList.remove('show');setTimeout(()=>document.getElementById('welcomeModal').style.display='none',300);updateTitleForPlatform(n);toast('✅ '+n+' selected')}
-function updateTitleForPlatform(p){
-    const titles={TikTok:'Download TikTok Videos & Stories Without Watermark',Instagram:'Download Instagram Reels & Stories Without Watermark',Snapchat:'Download Snapchat Stories & Spotlight Without Watermark',Facebook:'Download Facebook Videos & Reels Without Watermark',Pinterest:'Download Pinterest Videos & Images Without Watermark'};
-    document.getElementById('mainTitle').textContent=titles[p]||t('mainTitle');
-}
-function toast(m){const c=document.getElementById('toastContainer');const t=document.createElement('div');t.className='toast';t.textContent=m;c.appendChild(t);setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(120%)';t.style.transition='0.3s';setTimeout(()=>t.remove(),300)},2500)}
-function pasteLink(){navigator.clipboard.readText().then(text=>{document.getElementById('videoUrl').value=text;document.getElementById('clearBtn').classList.remove('hidden');detectPlatform();toast(t('pasted'))}).catch(()=>{})}
-function clearInput(){document.getElementById('videoUrl').value='';document.getElementById('clearBtn').classList.add('hidden');document.getElementById('platformBadge').classList.add('hidden')}
-function copyVideoLink(){if(!currentVideoUrl)return;navigator.clipboard.writeText(currentVideoUrl);toast(t('copied'))}
-function copyToClipboard(text){navigator.clipboard.writeText(text);toast(t('copied'))}
-function toggleGuide(){document.getElementById('guideBox').classList.toggle('hidden')}
-function toggleSupport(){document.getElementById('supportDropdown').classList.toggle('hidden');document.getElementById('supportArrow').classList.toggle('rotate-180')}
-function switchMode(m){currentMode=m;document.getElementById('modeLink').classList.toggle('active',m==='link');document.getElementById('modeUsername').classList.toggle('active',m==='username')}
-function shareToSnapchat(){window.open('https://www.snapchat.com/scan?attachmentUrl='+encodeURIComponent(location.href),'_blank')}
-function shareToTelegram(){window.open('https://t.me/share/url?url='+encodeURIComponent(location.href),'_blank')}
-function downloadQuality(q){if(!currentVideoUrl)return;const a=document.createElement('a');a.href=currentVideoUrl;a.download='KRD-ProDown_'+q+'.mp4';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a)}
-function downloadAllPhotos(){document.querySelectorAll('#photoGrid button').forEach(b=>b.click())}
-function detectPlatform(){
-    const u=document.getElementById('videoUrl').value.trim();const b=document.getElementById('platformBadge');
-    if(!u){b.classList.add('hidden');return}
-    const p={'tiktok.com':'🎵 TikTok','instagram.com':'📸 Instagram','youtube.com':'▶️ YouTube','facebook.com':'📘 Facebook','snapchat.com':'👻 Snapchat','pinterest.com':'📌 Pinterest'};
-    for(const[d,n]of Object.entries(p)){if(u.includes(d)){b.classList.remove('hidden');b.textContent='🔍 '+n;currentPlatform=n;return}}
-    b.classList.add('hidden')
+function changeLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('krdpro_lang', lang);
+    updateAllTexts();
+    toast('✅ Language: ' + lang);
 }
 
-async function extractAudio(){
-    const url=document.getElementById('videoUrl').value.trim();if(!url)return toast(t('noUrl'));
-    try{const r=await fetch('https://api.cobalt.tools/api/json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,isAudioOnly:true,aFormat:'mp3'})});const d=await r.json();if(d.url){const a=document.createElement('a');a.href=d.url;a.download='KRD-ProDown_Audio.mp3';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a);toast(t('audioReady'))}}catch(e){toast(t('error'))}
+function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    localStorage.setItem('krdpro_theme', isLight ? 'light' : 'dark');
+    document.getElementById('themeIcon').className = isLight ? 'fa-solid fa-sun text-xs' : 'fa-solid fa-moon text-xs';
 }
 
-async function downloadVideo(){
-    const url=document.getElementById('videoUrl').value.trim();if(!url)return toast(t('noUrl'));
-    const btn=document.getElementById('downloadBtn'),o=btn.innerHTML;btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin ml-2"></i> '+t('waiting');
-    document.getElementById('previewCard').classList.add('hidden');document.getElementById('photoCard').classList.add('hidden');
-    try{
-        let result=null;
-        if(url.includes('tiktok.com')||url.includes('vm.tiktok')){
-            const r=await fetch('https://www.tikwm.com/api/?url='+encodeURIComponent(url));const d=await r.json();
-            if(d.code===0&&d.data){const v=d.data;if(v.images&&v.images.length>0){result={images:v.images,platform:'TikTok'}}else{const vu=v.hdplay||v.play||v.wmplay;if(vu)result={videoUrl:vu,audioUrl:v.music||v.music_info?.url,author:v.author?.nickname||'TikTok',title:v.title||'',platform:'TikTok'}}}
+function selectPlatform(n) {
+    currentPlatform = n;
+    document.getElementById('welcomeModal').classList.remove('show');
+    setTimeout(() => document.getElementById('welcomeModal').style.display = 'none', 300);
+    updateTitleForPlatform(n);
+    toast('✅ ' + n + ' selected');
+}
+
+function updateTitleForPlatform(p) {
+    const titles = {
+        TikTok: 'Download TikTok Videos & Stories Without Watermark',
+        Instagram: 'Download Instagram Reels & Stories Without Watermark',
+        Snapchat: 'Download Snapchat Stories & Spotlight Without Watermark',
+        Facebook: 'Download Facebook Videos & Reels Without Watermark',
+        Pinterest: 'Download Pinterest Videos & Images Without Watermark'
+    };
+    document.getElementById('mainTitle').textContent = titles[p] || t('mainTitle');
+}
+
+function toast(m) {
+    const c = document.getElementById('toastContainer');
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = m;
+    c.appendChild(el);
+    setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(120%)';
+        el.style.transition = '0.3s';
+        setTimeout(() => el.remove(), 300);
+    }, 2500);
+}
+
+function pasteLink() {
+    navigator.clipboard.readText().then(text => {
+        document.getElementById('videoUrl').value = text;
+        document.getElementById('clearBtn').classList.remove('hidden');
+        detectPlatform();
+        toast(t('pasted'));
+    }).catch(() => {});
+}
+
+function clearInput() {
+    document.getElementById('videoUrl').value = '';
+    document.getElementById('clearBtn').classList.add('hidden');
+    document.getElementById('platformBadge').classList.add('hidden');
+}
+
+function copyVideoLink() {
+    if (!currentVideoUrl) return;
+    navigator.clipboard.writeText(currentVideoUrl);
+    toast(t('copied'));
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+    toast(t('copied'));
+}
+
+function toggleGuide() {
+    document.getElementById('guideBox').classList.toggle('hidden');
+}
+
+function toggleSupport() {
+    document.getElementById('supportDropdown').classList.toggle('hidden');
+    document.getElementById('supportArrow').classList.toggle('rotate-180');
+}
+
+function switchMode(m) {
+    currentMode = m;
+    document.getElementById('modeLink').classList.toggle('active', m === 'link');
+    document.getElementById('modeUsername').classList.toggle('active', m === 'username');
+}
+
+function shareToSnapchat() {
+    window.open('https://www.snapchat.com/scan?attachmentUrl=' + encodeURIComponent(location.href), '_blank');
+}
+
+function shareToTelegram() {
+    window.open('https://t.me/share/url?url=' + encodeURIComponent(location.href), '_blank');
+}
+
+function downloadQuality(q) {
+    if (!currentVideoUrl) return;
+    const a = document.createElement('a');
+    a.href = currentVideoUrl;
+    a.download = 'KRD-ProDown_' + q + '.mp4';
+    a.target = '_blank';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+function downloadSinglePhoto(url, index) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'KRD-ProDown_' + (index + 1) + '.jpg';
+    a.target = '_blank';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+function downloadAllPhotos() {
+    const btns = document.querySelectorAll('#photoGrid button');
+    btns.forEach(b => b.click());
+}
+
+function detectPlatform() {
+    const u = document.getElementById('videoUrl').value.trim();
+    const b = document.getElementById('platformBadge');
+    if (!u) {
+        b.classList.add('hidden');
+        return;
+    }
+    const p = {
+        'tiktok.com': '🎵 TikTok',
+        'instagram.com': '📸 Instagram',
+        'youtube.com': '▶️ YouTube',
+        'facebook.com': '📘 Facebook',
+        'snapchat.com': '👻 Snapchat',
+        'pinterest.com': '📌 Pinterest'
+    };
+    for (const [d, n] of Object.entries(p)) {
+        if (u.includes(d)) {
+            b.classList.remove('hidden');
+            b.textContent = '🔍 ' + n;
+            currentPlatform = n;
+            return;
         }
-        if(!result){
-            const r=await fetch('https://api.cobalt.tools/api/json',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({url,vQuality:'1080',filenamePattern:'basic',isAudioOnly:false})});const d=await r.json();
-            if(d.url||d.status==='redirect'||d.status==='stream'||d.status==='tunnel'){result={videoUrl:d.url,audioUrl:d.url,author:currentPlatform||'Media',title:'',platform:currentPlatform||'Video'}}
-            else if(d.status==='picker'&&d.picker&&d.picker.length>0){result={images:d.picker.map(i=>i.url),platform:'Album'}}
-        }
-        if(result){if(result.images){showPhotos(result.images);toast(t('albumReady'))}else{currentVideoUrl=result.videoUrl;showPreview(result);toast(t('success'))}}else{toast('❌ Download failed')}
-    }catch(e){toast(t('error'))}
-    btn.disabled=false;btn.innerHTML=o
+    }
+    b.classList.add('hidden');
 }
 
-function showPreview(d){
+async function extractAudio() {
+    const url = document.getElementById('videoUrl').value.trim();
+    if (!url) return toast(t('noUrl'));
+    try {
+        const r = await fetch('https://api.cobalt.tools/api/json', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url, isAudioOnly: true, aFormat: 'mp3' })
+        });
+        const d = await r.json();
+        if (d.url) {
+            const a = document.createElement('a');
+            a.href = d.url;
+            a.download = 'KRD-ProDown_Audio.mp3';
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            toast(t('audioReady'));
+        }
+    } catch (e) {
+        toast(t('error'));
+    }
+}
+
+async function downloadVideo() {
+    const url = document.getElementById('videoUrl').value.trim();
+    if (!url) return toast(t('noUrl'));
+    const btn = document.getElementById('downloadBtn');
+    const orig = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin ml-2"></i> ' + t('waiting');
+    
+    document.getElementById('previewCard').classList.add('hidden');
+    document.getElementById('photoCard').classList.add('hidden');
+    
+    try {
+        let result = null;
+        if (url.includes('tiktok.com') || url.includes('vm.tiktok')) {
+            const r = await fetch('https://www.tikwm.com/api/?url=' + encodeURIComponent(url));
+            const d = await r.json();
+            if (d.code === 0 && d.data) {
+                const v = d.data;
+                if (v.images && v.images.length > 0) {
+                    result = { images: v.images, platform: 'TikTok' };
+                } else {
+                    const vu = v.hdplay || v.play || v.wmplay;
+                    if (vu) {
+                        result = {
+                            videoUrl: vu,
+                            audioUrl: v.music || v.music_info?.url,
+                            author: v.author?.nickname || 'TikTok',
+                            title: v.title || '',
+                            platform: 'TikTok'
+                        };
+                    }
+                }
+            }
+        }
+        
+        if (!result) {
+            const r = await fetch('https://api.cobalt.tools/api/json', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ url, vQuality: '1080', filenamePattern: 'basic', isAudioOnly: false })
+            });
+            const d = await r.json();
+            if (d.url || d.status === 'redirect' || d.status === 'stream' || d.status === 'tunnel') {
+                result = {
+                    videoUrl: d.url,
+                    audioUrl: d.url,
+                    author: currentPlatform || 'Media',
+                    title: '',
+                    platform: currentPlatform || 'Video'
+                };
+            } else if (d.status === 'picker' && d.picker && d.picker.length > 0) {
+                result = { images: d.picker.map(i => i.url), platform: 'Album' };
+            }
+        }
+        
+        if (result) {
+            if (result.images) {
+                showPhotos(result.images);
+                toast(t('albumReady'));
+            } else {
+                currentVideoUrl = result.videoUrl;
+                showPreview(result);
+                toast(t('success'));
+            }
+        } else {
+            toast('❌ Download failed');
+        }
+    } catch (e) {
+        toast(t('error'));
+    }
+    
+    btn.disabled = false;
+    btn.innerHTML = orig;
+}
+
+function showPreview(d) {
     document.getElementById('previewCard').classList.remove('hidden');
-    document.getElementById('previewVideo').src=d.videoUrl;document.getElementById('previewVideo').load();
-    document.getElementById('previewAuthor').textContent=d.author;
-    document.getElementById('previewPlatform').textContent=d.platform;
-    document.getElementById('previewDesc').textContent=d.title;
-    document.getElementById('dlBtn').onclick=()=>{const a=document.createElement('a');a.href=d.videoUrl;a.download='KRD-ProDown.mp4';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a)};
-    document.getElementById('audioBtn').onclick=()=>{const a=document.createElement('a');a.href=d.audioUrl;a.download='KRD-ProDown.mp3';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a)};
-    document.getElementById('previewCard').scrollIntoView({behavior:'smooth'})
+    document.getElementById('previewVideo').src = d.videoUrl;
+    document.getElementById('previewVideo').load();
+    document.getElementById('previewAuthor').textContent = d.author;
+    document.getElementById('previewPlatform').textContent = d.platform;
+    document.getElementById('previewDesc').textContent = d.title;
+    
+    document.getElementById('dlBtn').onclick = () => {
+        const a = document.createElement('a');
+        a.href = d.videoUrl;
+        a.download = 'KRD-ProDown.mp4';
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+    
+    document.getElementById('audioBtn').onclick = () => {
+        const a = document.createElement('a');
+        a.href = d.audioUrl;
+        a.download = 'KRD-ProDown.mp3';
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+    
+    document.getElementById('previewCard').scrollIntoView({ behavior: 'smooth' });
 }
 
-function showPhotos(imgs){
+function showPhotos(imgs) {
     document.getElementById('photoCard').classList.remove('hidden');
-    document.getElementById('photoGrid').innerHTML=imgs.map((u,i)=>'<div class="relative group rounded-xl overflow-hidden aspect-square bg-slate-800"><img src="https://images.weserv.nl/?url='+encodeURIComponent(u)+'" class="w-full h-full object-cover" loading="lazy"><button onclick="(function(){const a=document.createElement(\'a\');a.href=\''+u+'\';a.download=\'KRD-ProDown_'+(i+1)+'.jpg\';a.target=\'_blank\';document.body.appendChild(a);a.click();document.body.removeChild(a)})()" class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 text-white text-xs font-bold"><i class="fa-solid fa-download ml-1"></i></button></div>').join('');
-    document.getElementById('photoCard').scrollIntoView({behavior:'smooth'})
+    const container = document.getElementById('photoGrid');
+    container.innerHTML = '';
+    
+    imgs.forEach((u, i) => {
+        const item = document.createElement('div');
+        item.className = 'relative group rounded-xl overflow-hidden aspect-square bg-slate-800';
+        item.innerHTML = `
+            <img src="https://images.weserv.nl/?url=${encodeURIComponent(u)}" class="w-full h-full object-cover" loading="lazy">
+            <button class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 text-white text-xs font-bold transition-all">
+                <i class="fa-solid fa-download ml-1"></i>
+            </button>
+        `;
+        item.querySelector('button').addEventListener('click', () => downloadSinglePhoto(u, i));
+        container.appendChild(item);
+    });
+    
+    document.getElementById('photoCard').scrollIntoView({ behavior: 'smooth' });
 }
 </script>
 </body>
