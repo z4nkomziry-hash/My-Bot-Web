@@ -221,18 +221,30 @@
             <p class="text-xs text-slate-400 mb-5">یارمەتیمان بدە بۆ بەردەوامبوونی خزمەتگوزاری بێبەرامبەر</p>
             
             <div class="grid grid-cols-3 gap-2 mb-5">
-                <button onclick="donate('5')" class="bg-white/5 border border-white/5 hover:border-amber-500/30 py-3 rounded-xl text-white font-bold text-sm transition-all">$5</button>
-                <button onclick="donate('10')" class="bg-amber-500/10 border border-amber-500/30 py-3 rounded-xl text-amber-400 font-bold text-sm transition-all hover:bg-amber-500/20">$10</button>
-                <button onclick="donate('25')" class="bg-white/5 border border-white/5 hover:border-amber-500/30 py-3 rounded-xl text-white font-bold text-sm transition-all">$25</button>
+                <button onclick="donate('5')" class="bg-white/5 border border-white/5 hover:border-violet-500/30 py-3 rounded-xl text-white font-bold text-sm transition-all">5,000 IQD</button>
+                <button onclick="donate('10')" class="bg-violet-500/10 border border-violet-500/30 py-3 rounded-xl text-violet-400 font-bold text-sm transition-all hover:bg-violet-500/20">10,000 IQD</button>
+                <button onclick="donate('25')" class="bg-white/5 border border-white/5 hover:border-violet-500/30 py-3 rounded-xl text-white font-bold text-sm transition-all">25,000 IQD</button>
             </div>
             
-            <div class="flex justify-center gap-3">
-                <a href="https://www.buymeacoffee.com/zaniyar" target="_blank" class="bg-amber-500 hover:bg-amber-600 text-black font-bold py-2.5 px-4 rounded-xl text-xs transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-mug-hot"></i> Buy Me a Coffee
-                </a>
-                <a href="https://paypal.me/zaniyar" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-all flex items-center gap-2">
-                    <i class="fa-brands fa-paypal"></i> PayPal
-                </a>
+            <div class="grid grid-cols-2 gap-3 mb-5">
+                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-4 text-center hover:border-violet-500/30 transition-all">
+                    <i class="fa-solid fa-building-columns text-violet-400 text-2xl mb-2"></i>
+                    <p class="text-xs font-bold text-white mb-1">FIB</p>
+                    <p class="text-[10px] text-slate-400 mb-2">First Iraqi Bank</p>
+                    <code class="bg-violet-500/10 text-violet-400 px-2 py-1 rounded-lg text-[10px] font-mono">1234-5678-9012-3456</code>
+                    <button onclick="copyFIB()" class="mt-2 text-[10px] bg-violet-500/20 text-violet-400 hover:bg-violet-500/30 px-3 py-1 rounded-lg transition-all">
+                        <i class="fa-solid fa-copy ml-1"></i> کۆپی
+                    </button>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-4 text-center hover:border-pink-500/30 transition-all">
+                    <i class="fa-solid fa-bolt text-pink-400 text-2xl mb-2"></i>
+                    <p class="text-xs font-bold text-white mb-1">FastPay</p>
+                    <p class="text-[10px] text-slate-400 mb-2">Zain Cash / Asia Hawala</p>
+                    <code class="bg-pink-500/10 text-pink-400 px-2 py-1 rounded-lg text-[10px] font-mono">0770-123-4567</code>
+                    <button onclick="copyFastPay()" class="mt-2 text-[10px] bg-pink-500/20 text-pink-400 hover:bg-pink-500/30 px-3 py-1 rounded-lg transition-all">
+                        <i class="fa-solid fa-copy ml-1"></i> کۆپی
+                    </button>
+                </div>
             </div>
             
             <div class="mt-5 pt-4 border-t border-white/5">
@@ -246,26 +258,55 @@
             </div>
         </div>
 
+        <!-- USER LEVELS -->
+        <div class="glass-card p-5 sm:p-6 mb-5 text-center" id="levelsCard">
+            <h3 class="text-lg font-black text-white mb-2">🏆 ئاستەکانی بەکارهێنەر</h3>
+            <p class="text-xs text-slate-400 mb-5">بەپێی ژمارەی داونلۆدەکانت ئاستی خۆت بەرز بکەرەوە</p>
+            <div class="grid grid-cols-4 gap-2">
+                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-3 text-center">
+                    <i class="fa-solid fa-medal text-amber-700 text-xl mb-1"></i>
+                    <p class="text-[10px] font-bold text-amber-700">Bronze</p>
+                    <p class="text-[9px] text-slate-500">٠-١٠</p>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-3 text-center">
+                    <i class="fa-solid fa-medal text-slate-400 text-xl mb-1"></i>
+                    <p class="text-[10px] font-bold text-slate-400">Silver</p>
+                    <p class="text-[9px] text-slate-500">١٠-٥٠</p>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-3 text-center">
+                    <i class="fa-solid fa-medal text-amber-400 text-xl mb-1"></i>
+                    <p class="text-[10px] font-bold text-amber-400">Gold</p>
+                    <p class="text-[9px] text-slate-500">٥٠-١٠٠</p>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-3 text-center">
+                    <i class="fa-solid fa-gem text-sky-400 text-xl mb-1"></i>
+                    <p class="text-[10px] font-bold text-sky-400">Diamond</p>
+                    <p class="text-[9px] text-slate-500">١٠٠+</p>
+                </div>
+            </div>
+            <p class="text-[10px] text-slate-500 mt-3" id="userLevel">چوونەژوورەوە بۆ بینینی ئاستی خۆت</p>
+        </div>
+
         <!-- FEATURES -->
         <div class="glass-card p-5 mb-5">
             <h3 class="font-bold text-sm mb-4 text-center">🔥 بۆچی KRD-ProDown؟</h3>
             <div class="grid grid-cols-2 gap-3">
-                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center hover:border-pink-500/20 transition-all">
+                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center">
                     <i class="fa-solid fa-bolt text-pink-400 text-lg mb-1"></i>
                     <p class="text-xs font-bold">خێرایی بەرز</p>
                     <p class="text-[10px] text-slate-500">داونلۆدی ڕاستەوخۆ</p>
                 </div>
-                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center hover:border-pink-500/20 transition-all">
+                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center">
                     <i class="fa-solid fa-shield-halved text-violet-400 text-lg mb-1"></i>
                     <p class="text-xs font-bold">بێ واتەرمارک</p>
                     <p class="text-[10px] text-slate-500">ڤیدیۆی پاک</p>
                 </div>
-                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center hover:border-pink-500/20 transition-all">
+                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center">
                     <i class="fa-solid fa-globe text-sky-400 text-lg mb-1"></i>
                     <p class="text-xs font-bold">٣٠+ پلاتفۆرم</p>
                     <p class="text-[10px] text-slate-500">پشتگیری فراوان</p>
                 </div>
-                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center hover:border-pink-500/20 transition-all">
+                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-3 text-center">
                     <i class="fa-solid fa-lock text-emerald-400 text-lg mb-1"></i>
                     <p class="text-xs font-bold">پارێزراو</p>
                     <p class="text-[10px] text-slate-500">بێ خەزنکردنی داتا</p>
@@ -294,7 +335,7 @@
     <!-- SCRIPTS -->
     <script>
         // ============================================
-        // KRD-ProDown - Complete App
+        // KRD-ProDown - Complete App v4.0
         // ============================================
         let currentVideoUrl = '', albumImages = [], currentPlatform = '', currentMode = 'link';
         let history = JSON.parse(localStorage.getItem('krdpro_history') || '[]');
@@ -312,6 +353,7 @@
                 localStorage.setItem('krdpro_referral', referralCode);
             }
             updateAuthUI();
+            updateUserLevel();
             renderHistory();
             if (currentUser) {
                 document.getElementById('referralCard').classList.remove('hidden');
@@ -344,45 +386,35 @@
         function pasteLink() { if (!navigator.clipboard) return; navigator.clipboard.readText().then(text => { document.getElementById('videoUrl').value = text; detectPlatform(); toast('📋 لینک پەیست کرا'); }).catch(() => toast('❌ ناتوانرێت پەیست بکرێت')); }
         function downloadQuality(q) { if (!currentVideoUrl) return toast('⚠️ ڤیدیۆ نەدۆزراوەتەوە'); const a = document.createElement('a'); a.href = currentVideoUrl; a.download = 'KRD-ProDown_' + q + '.mp4'; a.target = '_blank'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }
         function downloadAllPhotos() { if (!albumImages.length) return; albumImages.forEach((url, i) => setTimeout(() => { const a = document.createElement('a'); a.href = url; a.download = 'KRD-ProDown_' + (i+1) + '.jpg'; a.target = '_blank'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }, i * 300)); toast('📸 وێنەکان داونلۆد دەکرێن'); }
-        function donate(amount) { window.open('https://www.buymeacoffee.com/zaniyar', '_blank'); toast('💎 سوپاس بۆ پشتگیری ' + amount + '$!'); }
 
-        function renderHistory() { const card = document.getElementById('historyCard'); const list = document.getElementById('historyList'); if (!history.length) { card.classList.add('hidden'); return; } card.classList.remove('hidden'); list.innerHTML = history.slice(0, 10).map((h, i) => `<div class="flex justify-between items-center bg-white/5 rounded-lg px-3 py-2 text-xs"><span class="text-slate-400 truncate flex-1 cursor-pointer" onclick="document.getElementById('videoUrl').value='${h.url}'">${h.url.substring(0, 60)}</span><span class="text-[10px] text-slate-600 mx-2">${h.platform || ''}</span><button onclick="deleteHistoryItem(${i})" class="text-rose-400 hover:text-rose-300">✕</button></div>`).join(''); }
+        // ===== DONATE =====
+        function donate(amount) { toast('💎 سوپاس بۆ پشتگیری ' + amount + ' هەزار دینار!'); document.querySelector('.grid.grid-cols-2.gap-3')?.scrollIntoView({ behavior: 'smooth' }); }
+        function copyFIB() { navigator.clipboard.writeText('1234-5678-9012-3456'); toast('📋 ژمارەی FIB کۆپی کرا'); }
+        function copyFastPay() { navigator.clipboard.writeText('0770-123-4567'); toast('📋 ژمارەی FastPay کۆپی کرا'); }
+
+        // ===== USER LEVEL =====
+        function updateUserLevel() { const levelEl = document.getElementById('userLevel'); if (!levelEl) return; if (!currentUser) { levelEl.textContent = 'چوونەژوورەوە بۆ بینینی ئاستی خۆت'; return; } const downloads = currentUser.downloads || 0; let level, color; if (downloads >= 100) { level = 'Diamond 💎'; color = '#38bdf8'; } else if (downloads >= 50) { level = 'Gold 🥇'; color = '#fbbf24'; } else if (downloads >= 10) { level = 'Silver 🥈'; color = '#94a3b8'; } else { level = 'Bronze 🥉'; color = '#92400e'; } levelEl.innerHTML = '<span style="color: ' + color + '">ئاستی تۆ: <b>' + level + '</b> | ' + downloads + ' داونلۆد</span>'; }
+
+        // ===== HISTORY =====
+        function renderHistory() { const card = document.getElementById('historyCard'); const list = document.getElementById('historyList'); if (!history.length) { card.classList.add('hidden'); return; } card.classList.remove('hidden'); list.innerHTML = history.slice(0, 10).map((h, i) => '<div class="flex justify-between items-center bg-white/5 rounded-lg px-3 py-2 text-xs"><span class="text-slate-400 truncate flex-1 cursor-pointer" onclick="document.getElementById(\'videoUrl\').value=\'' + h.url + '\'">' + h.url.substring(0, 60) + '</span><span class="text-[10px] text-slate-600 mx-2">' + (h.platform || '') + '</span><button onclick="deleteHistoryItem(' + i + ')" class="text-rose-400 hover:text-rose-300">✕</button></div>').join(''); }
         function addToHistory(url, platform) { history = history.filter(h => h.url !== url); history.unshift({ url, platform, date: new Date().toISOString() }); if (history.length > 50) history.pop(); localStorage.setItem('krdpro_history', JSON.stringify(history)); renderHistory(); }
         function deleteHistoryItem(i) { history.splice(i, 1); localStorage.setItem('krdpro_history', JSON.stringify(history)); renderHistory(); }
         function clearHistory() { history = []; localStorage.removeItem('krdpro_history'); renderHistory(); toast('🧹 مێژوو پاککرایەوە'); }
 
+        // ===== AUTH =====
         function showAuthModal() { document.getElementById('authModal').classList.add('show'); if (currentUser) { document.getElementById('authTitle').textContent = 'هەژماری تۆ'; document.getElementById('authName').value = currentUser.name; document.getElementById('authPassword').value = ''; document.getElementById('authSubmit').textContent = 'چوونەدەرەوە'; document.getElementById('authStatus').textContent = '🔥 ' + (currentUser.downloads || 0) + ' داونلۆد'; } else { document.getElementById('authTitle').textContent = 'دروستکردنی هەژمار'; document.getElementById('authName').value = ''; document.getElementById('authPassword').value = ''; document.getElementById('authSubmit').textContent = 'دروستکردن / چوونەژوورەوە'; document.getElementById('authStatus').textContent = ''; } }
         function closeAuthModal() { document.getElementById('authModal').classList.remove('show'); }
-        function handleAuth() { const name = document.getElementById('authName').value.trim(); const password = document.getElementById('authPassword').value.trim(); if (currentUser) { currentUser = null; localStorage.removeItem('krdpro_user'); updateAuthUI(); closeAuthModal(); document.getElementById('referralCard').classList.add('hidden'); toast('👋 بە سڵامەتی!'); return; } if (!name || !password) return toast('⚠️ ناو و وشەی نهێنی پێویستە'); currentUser = { name, password, downloads: 0, joinDate: new Date().toISOString() }; localStorage.setItem('krdpro_user', JSON.stringify(currentUser)); updateAuthUI(); closeAuthModal(); document.getElementById('referralCard').classList.remove('hidden'); document.getElementById('referralCode').textContent = referralCode; toast('🎉 بەخێربێیت ' + name + '!'); }
+        function handleAuth() { const name = document.getElementById('authName').value.trim(); const password = document.getElementById('authPassword').value.trim(); if (currentUser) { currentUser = null; localStorage.removeItem('krdpro_user'); updateAuthUI(); updateUserLevel(); closeAuthModal(); document.getElementById('referralCard').classList.add('hidden'); toast('👋 بە سڵامەتی!'); return; } if (!name || !password) return toast('⚠️ ناو و وشەی نهێنی پێویستە'); currentUser = { name, password, downloads: 0, joinDate: new Date().toISOString() }; localStorage.setItem('krdpro_user', JSON.stringify(currentUser)); updateAuthUI(); updateUserLevel(); closeAuthModal(); document.getElementById('referralCard').classList.remove('hidden'); document.getElementById('referralCode').textContent = referralCode; toast('🎉 بەخێربێیت ' + name + '!'); }
         function updateAuthUI() { const btn = document.getElementById('authBtn'); if (currentUser) { btn.innerHTML = '<i class="fa-solid fa-user ml-1"></i> ' + currentUser.name; btn.classList.add('text-emerald-400'); } else { btn.innerHTML = '<i class="fa-solid fa-user ml-1"></i> هەژمار'; btn.classList.remove('text-emerald-400'); } }
         function copyReferral() { navigator.clipboard.writeText(window.location.href + '?ref=' + referralCode); toast('📋 کۆدی ئاماژەدان کۆپی کرا'); }
 
-        async function downloadVideo() {
-            if (currentMode === 'batch') { const text = document.getElementById('batchUrls').value.trim(); if (!text) return toast('⚠️ تکایە لینکەکان بنووسە'); const urls = text.split('\n').filter(l => l.trim()); toast('📦 داونلۆدی ' + urls.length + ' ڤیدیۆ...'); for (const url of urls) { await processDownload(url.trim()); await new Promise(r => setTimeout(r, 1000)); } toast('✅ هەموو ڤیدیۆکان ئامادەن!'); return; }
-            const url = document.getElementById('videoUrl').value.trim(); if (!url) return toast('⚠️ تکایە لینکی ڤیدیۆ بنووسە'); await processDownload(url);
-        }
+        // ===== DOWNLOAD =====
+        async function downloadVideo() { if (currentMode === 'batch') { const text = document.getElementById('batchUrls').value.trim(); if (!text) return toast('⚠️ تکایە لینکەکان بنووسە'); const urls = text.split('\n').filter(l => l.trim()); toast('📦 داونلۆدی ' + urls.length + ' ڤیدیۆ...'); for (const url of urls) { await processDownload(url.trim()); await new Promise(r => setTimeout(r, 1000)); } toast('✅ هەموو ڤیدیۆکان ئامادەن!'); return; } const url = document.getElementById('videoUrl').value.trim(); if (!url) return toast('⚠️ تکایە لینکی ڤیدیۆ بنووسە'); await processDownload(url); }
 
-        async function processDownload(url) {
-            const btn = document.getElementById('downloadBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin ml-2"></i> چاوەڕێ بە...';
-            const progress = document.getElementById('progressContainer'); const fill = document.getElementById('progressFill'); progress.classList.remove('hidden'); fill.style.width = '30%';
-            document.getElementById('previewCard').classList.add('hidden'); document.getElementById('photoCard').classList.add('hidden');
-            try {
-                fill.style.width = '60%';
-                if (url.includes('tiktok.com') || url.includes('vm.tiktok')) {
-                    const res = await fetch('https://www.tikwm.com/api/?url=' + encodeURIComponent(url)); const data = await res.json();
-                    if (data.code === 0 && data.data) { const d = data.data; if (d.images?.length) { albumImages = d.images; showPhotos(d.images); } else { currentVideoUrl = d.hdplay || d.play; showPreview({ videoUrl: currentVideoUrl, audioUrl: d.music, author: d.author?.nickname || 'TikTok', title: d.title || '', platform: 'TikTok' }); } addToHistory(url, 'TikTok'); if (currentUser) { currentUser.downloads = (currentUser.downloads || 0) + 1; localStorage.setItem('krdpro_user', JSON.stringify(currentUser)); } fill.style.width = '100%'; toast('✅ سەرکەوتوو بوو!'); setTimeout(() => progress.classList.add('hidden'), 1000); btn.disabled = false; btn.innerHTML = orig; return; }
-                }
-                fill.style.width = '80%';
-                const cRes = await fetch('https://api.cobalt.tools/api/json', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url, vQuality: '720', filenamePattern: 'basic' }) }); const cData = await cRes.json();
-                if (cData.url || cData.status === 'redirect' || cData.status === 'stream') { currentVideoUrl = cData.url; showPreview({ videoUrl: cData.url, audioUrl: cData.url, author: currentPlatform || 'Media', title: '', platform: currentPlatform || 'Video' }); addToHistory(url, currentPlatform); fill.style.width = '100%'; toast('✅ سەرکەوتوو بوو!'); }
-                else if (cData.status === 'picker' && cData.picker?.length) { albumImages = cData.picker.map(i => i.url); showPhotos(albumImages); addToHistory(url, currentPlatform); fill.style.width = '100%'; toast('✅ ئەلبوم ئامادەیە!'); }
-                else { fill.style.width = '0%'; toast('❌ نەتوانرا داونلۆد بکرێت'); }
-            } catch(e) { fill.style.width = '0%'; toast('❌ کێشەیەک ڕوویدا'); }
-            setTimeout(() => progress.classList.add('hidden'), 1000); btn.disabled = false; btn.innerHTML = orig;
-        }
+        async function processDownload(url) { const btn = document.getElementById('downloadBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin ml-2"></i> چاوەڕێ بە...'; const progress = document.getElementById('progressContainer'); const fill = document.getElementById('progressFill'); progress.classList.remove('hidden'); fill.style.width = '30%'; document.getElementById('previewCard').classList.add('hidden'); document.getElementById('photoCard').classList.add('hidden'); try { fill.style.width = '60%'; if (url.includes('tiktok.com') || url.includes('vm.tiktok')) { const res = await fetch('https://www.tikwm.com/api/?url=' + encodeURIComponent(url)); const data = await res.json(); if (data.code === 0 && data.data) { const d = data.data; if (d.images?.length) { albumImages = d.images; showPhotos(d.images); } else { currentVideoUrl = d.hdplay || d.play; showPreview({ videoUrl: currentVideoUrl, audioUrl: d.music, author: d.author?.nickname || 'TikTok', title: d.title || '', platform: 'TikTok' }); } addToHistory(url, 'TikTok'); if (currentUser) { currentUser.downloads = (currentUser.downloads || 0) + 1; localStorage.setItem('krdpro_user', JSON.stringify(currentUser)); updateUserLevel(); } fill.style.width = '100%'; toast('✅ سەرکەوتوو بوو!'); setTimeout(() => progress.classList.add('hidden'), 1000); btn.disabled = false; btn.innerHTML = orig; return; } } fill.style.width = '80%'; const cRes = await fetch('https://api.cobalt.tools/api/json', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url, vQuality: '720', filenamePattern: 'basic' }) }); const cData = await cRes.json(); if (cData.url || cData.status === 'redirect' || cData.status === 'stream') { currentVideoUrl = cData.url; showPreview({ videoUrl: cData.url, audioUrl: cData.url, author: currentPlatform || 'Media', title: '', platform: currentPlatform || 'Video' }); addToHistory(url, currentPlatform); fill.style.width = '100%'; toast('✅ سەرکەوتوو بوو!'); } else if (cData.status === 'picker' && cData.picker?.length) { albumImages = cData.picker.map(i => i.url); showPhotos(albumImages); addToHistory(url, currentPlatform); fill.style.width = '100%'; toast('✅ ئەلبوم ئامادەیە!'); } else { fill.style.width = '0%'; toast('❌ نەتوانرا داونلۆد بکرێت'); } } catch(e) { fill.style.width = '0%'; toast('❌ کێشەیەک ڕوویدا'); } setTimeout(() => progress.classList.add('hidden'), 1000); btn.disabled = false; btn.innerHTML = orig; }
 
         function showPreview(data) { const card = document.getElementById('previewCard'); card.classList.remove('hidden'); document.getElementById('previewVideo').src = data.videoUrl; document.getElementById('previewAuthor').textContent = data.author; document.getElementById('previewPlatform').textContent = data.platform; document.getElementById('dlBtn').onclick = () => { const a = document.createElement('a'); a.href = data.videoUrl; a.download = 'KRD-ProDown.mp4'; a.target = '_blank'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }; document.getElementById('audioBtn').onclick = () => { const a = document.createElement('a'); a.href = data.audioUrl; a.download = 'KRD-ProDown.mp3'; a.target = '_blank'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }; card.scrollIntoView({ behavior: 'smooth' }); }
-        function showPhotos(images) { const card = document.getElementById('photoCard'); card.classList.remove('hidden'); document.getElementById('photoGrid').innerHTML = images.map((url, i) => `<div class="relative group rounded-xl overflow-hidden aspect-square bg-slate-800"><img src="https://images.weserv.nl/?url=${encodeURIComponent(url)}" class="w-full h-full object-cover" loading="lazy"><button onclick="(function(){const a=document.createElement('a');a.href='${url}';a.download='KRD-ProDown_${i+1}.jpg';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a)})()" class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 text-white text-xs font-bold"><i class="fa-solid fa-download ml-1"></i></button></div>`).join(''); card.scrollIntoView({ behavior: 'smooth' }); }
+        function showPhotos(images) { const card = document.getElementById('photoCard'); card.classList.remove('hidden'); document.getElementById('photoGrid').innerHTML = images.map((url, i) => '<div class="relative group rounded-xl overflow-hidden aspect-square bg-slate-800"><img src="https://images.weserv.nl/?url=' + encodeURIComponent(url) + '" class="w-full h-full object-cover" loading="lazy"><button onclick="(function(){const a=document.createElement(\'a\');a.href=\'' + url + '\';a.download=\'KRD-ProDown_' + (i+1) + '.jpg\';a.target=\'_blank\';document.body.appendChild(a);a.click();document.body.removeChild(a)})()" class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 text-white text-xs font-bold"><i class="fa-solid fa-download ml-1"></i></button></div>').join(''); card.scrollIntoView({ behavior: 'smooth' }); }
     </script>
 </body>
 </html>
