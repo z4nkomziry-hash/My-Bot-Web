@@ -1,4 +1,4 @@
-import { Process, Processor } from '@nestjs/bull';
+import { Process, Processor, OnQueueActive, OnQueueCompleted, OnQueueFailed } from '@nestjs/bull';
 import { Job } from 'bull';
 import { DownloadService } from './download.service';
 import { LoggerService } from '../../common/services/logger.service';
@@ -12,20 +12,38 @@ export class DownloadProcessor {
 
   @Process('download')
   async handleDownload(job: Job<{ url: string; quality?: string; userId?: string }>) {
-    this.logger.log(`Processing download job ${job.id}: ${job.data.url}`, 'DownloadProcessor');
+    const { url, quality, userId } = job.data;
+    
+    this.logger.log(
+      `Processing job ${job.id}: ${url.substring(0, 50)}...`,
+      'DownloadProcessor',
+    );
 
-    try {
-      const result = await this.downloadService.processDownload(
-        job.data.url,
-        job.data.quality,
-        job.data.userId,
-      );
+    await job.progress(10);
 
-      this.logger.log(`Job ${job.id} completed successfully`, 'DownloadProcessor');
-      return result;
-    } catch (error) {
-      this.logger.error(`Job ${job.id} failed`, error.stack, 'DownloadProcessor');
-      throw error;
-    }
+    const result = await this.downloadService.processDownload(url, quality, userId);
+
+    await job.progress(100);
+
+    return result;
+  }
+
+  @OnQueueActive()
+  onActive(job: Job) {
+    this.logger.log(`Job ${job.id} started`, 'DownloadProcessor');
+  }
+
+  @OnQueueCompleted()
+  onCompleted(job: Job, result: any) {
+    this.logger.log(`Job ${job.id} completed`, 'DownloadProcessor');
+  }
+
+  @OnQueueFailed()
+  onFailed(job: Job, error: Error) {
+    this.logger.error(
+      `Job ${job.id} failed after ${job.attemptsMade} attempts`,
+      error.stack,
+      'DownloadProcessor',
+    );
   }
 }
