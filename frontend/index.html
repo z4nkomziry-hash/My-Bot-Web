@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRD-ProDown | دابەزێنەری ڤیدیۆ</title>
+    <meta name="description" content="KRD-ProDown - باشترین دابەزێنەری ڤیدیۆ و ستۆری بێ لۆگۆ">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800;900&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Noto Kufi Arabic',sans-serif;background:#0a0a1a;color:#fff;min-height:100vh}
+        .glass{background:rgba(255,255,255,0.03);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.06);border-radius:24px}
+        .btn{background:linear-gradient(135deg,#ec4899,#a855f7);color:#fff;font-weight:700;border:none;padding:16px 28px;border-radius:20px;cursor:pointer;transition:all 0.3s}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(236,72,153,0.4)}
+        .input{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:16px 50px;color:#fff;width:100%;font-size:14px}
+        .input:focus{outline:none;border-color:#ec4899}
+    </style>
+</head>
+<body>
+    <header class="border-b border-white/5 py-3 px-4">
+        <div class="max-w-3xl mx-auto flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-violet-600 flex items-center justify-center"><i class="fa-solid fa-bolt text-white"></i></div>
+                <span class="text-xl font-extrabold">KRD-<span class="bg-gradient-to-r from-pink-400 to-violet-400 bg-clip-text text-transparent">ProDown</span></span>
+            </a>
+            <div class="flex items-center gap-2">
+                <select id="langSelect" onchange="changeLanguage(this.value)" class="text-[10px] bg-white/5 border border-white/5 text-slate-400 rounded-lg px-2 py-1.5">
+                    <option value="badini">کوردی</option>
+                    <option value="sorani">سۆرانی</option>
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+                <button onclick="toggleTheme()" class="w-9 h-9 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-slate-400"><i id="themeIcon" class="fa-solid fa-moon text-xs"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-extrabold mb-2">دابەزێنەری <span class="bg-gradient-to-r from-pink-400 via-fuchsia-400 to-violet-400 bg-clip-text text-transparent">پڕۆفیشناڵ</span></h1>
+            <p class="text-sm text-slate-400">TikTok | Instagram | YouTube | Facebook | Snapchat | Pinterest</p>
+        </div>
+
+        <div class="glass p-5 sm:p-6 mb-5">
+            <div class="relative">
+                <i class="fa-solid fa-link absolute right-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                <input type="text" id="videoUrl" placeholder="لینکی ڤیدیۆکە لێرە دابنێ..." class="input" autocomplete="off">
+                <button onclick="pasteLink()" class="absolute left-3 top-1/2 -translate-y-1/2 text-xs bg-white/10 hover:bg-white/20 text-slate-300 px-3 py-1.5 rounded-lg"><i class="fa-solid fa-paste ml-1"></i> پەیست</button>
+            </div>
+            <button id="downloadBtn" onclick="downloadVideo()" class="btn w-full mt-4 text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-download"></i> دابەزێنە</button>
+        </div>
+
+        <div id="previewCard" class="hidden glass p-4 mb-5">
+            <video id="previewVideo" class="w-full max-h-[400px] object-contain rounded-xl bg-black" controls></video>
+            <div class="mt-4">
+                <h3 id="previewAuthor" class="font-bold text-sm"></h3>
+                <p id="previewPlatform" class="text-[10px] text-slate-400"></p>
+                <div class="flex gap-2 mt-3">
+                    <button id="dlBtn" class="btn flex-1 py-2.5 text-xs rounded-xl"><i class="fa-solid fa-download ml-1"></i> داونلۆد</button>
+                    <button id="audioBtn" class="bg-white/5 border border-white/5 text-white py-2.5 px-4 rounded-xl text-xs"><i class="fa-solid fa-music"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center py-6">
+            <p class="text-[10px] text-slate-600">© 2026 KRD-ProDown | Zaniyar Al-Mzuri Al-Kurdi</p>
+        </footer>
+    </main>
+
+    <script>
+        let currentVideoUrl='',currentLang='badini';
+        
+        function toggleTheme(){document.body.classList.toggle('light-mode');const l=document.body.classList.contains('light-mode');document.getElementById('themeIcon').className=l?'fa-solid fa-sun text-xs':'fa-solid fa-moon text-xs'}
+        function pasteLink(){navigator.clipboard.readText().then(t=>{document.getElementById('videoUrl').value=t})}
+        function changeLanguage(l){currentLang=l;localStorage.setItem('lang',l)}
+        
+        async function downloadVideo(){
+            const url=document.getElementById('videoUrl').value.trim();
+            if(!url)return alert('لینکی ڤیدیۆ بنووسە');
+            const btn=document.getElementById('downloadBtn');
+            btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin ml-2"></i> چاوەڕێ بە...';
+            
+            try{
+                let result;
+                if(url.includes('tiktok.com')){
+                    const r=await fetch('https://www.tikwm.com/api/?url='+encodeURIComponent(url));
+                    const d=await r.json();
+                    if(d.code===0&&d.data){result={videoUrl:d.data.hdplay||d.data.play,audioUrl:d.data.music,author:d.data.author?.nickname,platform:'TikTok'}}
+                }else{
+                    const r=await fetch('https://api.cobalt.tools/api/json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,vQuality:'720'})});
+                    const d=await r.json();
+                    if(d.url){result={videoUrl:d.url,audioUrl:d.url,author:'Media',platform:'Video'}}
+                }
+                
+                if(result){
+                    currentVideoUrl=result.videoUrl;
+                    document.getElementById('previewCard').classList.remove('hidden');
+                    document.getElementById('previewVideo').src=result.videoUrl;
+                    document.getElementById('previewAuthor').textContent=result.author;
+                    document.getElementById('previewPlatform').textContent=result.platform;
+                    document.getElementById('dlBtn').onclick=()=>{const a=document.createElement('a');a.href=result.videoUrl;a.download='video.mp4';a.target='_blank';document.body.appendChild(a);a.click()};
+                    document.getElementById('audioBtn').onclick=()=>{const a=document.createElement('a');a.href=result.audioUrl;a.download='audio.mp3';a.target='_blank';document.body.appendChild(a);a.click()};
+                    document.getElementById('previewCard').scrollIntoView({behavior:'smooth'});
+                }else{alert('نەتوانرا ڤیدیۆ داونلۆد بکرێت')}
+            }catch(e){alert('کێشەیەک ڕوویدا')}
+            btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-download ml-2"></i> دابەزێنە';
+        }
+    </script>
+</body>
+</html>
