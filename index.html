@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     
     <!-- SEO -->
-    <meta name="description" content="KRD-ProDown - باشترین دابەزێنەری ڤیدیۆ و ستۆری بێ لۆگۆ | TikTok, Instagram, YouTube, Facebook, Snapchat, Pinterest">
-    <meta name="keywords" content="KRD-ProDown, video downloader, tiktok, instagram, youtube, facebook, snapchat, pinterest">
+    <meta name="description" content="KRD-ProDown - Download Social Media Videos & Stories Without Watermark | TikTok, Instagram, YouTube, Facebook, Snapchat, Pinterest">
+    <meta name="keywords" content="KRD-ProDown, video downloader, tiktok no watermark, instagram, youtube, facebook, snapchat, pinterest">
     <meta name="author" content="Zaniyar Al-Mzuri Al-Kurdi">
-    <meta name="theme-color" content="#0a0a1a">
+    <meta name="theme-color" content="#090d16">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://krd-prodown.vercel.app/">
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://krd-prodown.vercel.app/">
-    <meta property="og:title" content="KRD-ProDown | دابەزێنەری ڤیدیۆی پڕۆفیشناڵ">
-    <meta property="og:description" content="داونلۆدی ڤیدیۆ، ستۆری، ڕیلز و GIF بە کوالیتی بەرز و بێ واتەرمارک">
+    <meta property="og:title" content="KRD-ProDown | Download Social Media Videos Without Watermark">
+    <meta property="og:description" content="Download videos, stories, reels and GIFs in high quality without watermark">
     <meta property="og:image" content="https://krd-prodown.vercel.app/icon.png">
     
     <!-- Twitter -->
@@ -24,7 +24,7 @@
     <meta name="twitter:title" content="KRD-ProDown | Video Downloader">
     <meta name="twitter:image" content="https://krd-prodown.vercel.app/icon.png">
     
-    <title>KRD-ProDown | دابەزێنەری پڕۆفیشناڵی ڤیدیۆ</title>
+    <title>KRD-ProDown | Download Social Media Videos & Stories Without Watermark</title>
     
     <!-- Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
@@ -41,220 +41,503 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800;900&display=swap');
-        *{margin:0;padding:0;box-sizing:border-box}
-        :root{--bg:#0a0a1a;--text:#fff;--muted:#94a3b8;--glass:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.06);--pink:#ec4899;--violet:#a855f7}
-        .light-mode{--bg:#f8fafc;--text:#0f172a;--muted:#64748b;--glass:rgba(15,23,42,0.03);--border:rgba(15,23,42,0.08)}
-        body{font-family:'Noto Kufi Arabic',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:all 0.3s ease;line-height:1.6}
-        ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--pink),var(--violet));border-radius:10px}
-        .glass{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:24px;transition:all 0.3s ease}
-        .glass:hover{border-color:rgba(255,255,255,0.12)}
-        .btn{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-weight:700;border:none;cursor:pointer;border-radius:20px;padding:16px 28px;box-shadow:0 4px 25px rgba(236,72,153,0.25);transition:all 0.3s ease}
-        .btn:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(236,72,153,0.4)}
-        .btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
-        .input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:16px;padding:16px 50px;color:var(--text);width:100%;font-size:14px;font-family:inherit;transition:all 0.3s ease}
-        .input:focus{outline:none;border-color:var(--pink)}
-        .input::placeholder{color:#64748b}
-        .modal{display:flex;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(12px);align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:all 0.3s ease}
-        .modal.show{opacity:1;pointer-events:auto}
-        .modal-inner{transform:scale(0.85);transition:all 0.3s ease}
-        .modal.show .modal-inner{transform:scale(1)}
-        .toast-container{position:fixed;top:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:8px}
-        .toast{background:rgba(15,23,42,0.95);border:1px solid rgba(255,255,255,0.1);padding:14px 18px;border-radius:16px;color:#fff;font-size:13px;font-weight:600;animation:slideIn 0.35s ease}
-        @keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
-        .rotate-180{transform:rotate(180deg)}
-        @media(max-width:640px){.input{padding:14px 40px;font-size:13px}.btn{padding:14px 20px;font-size:13px}}
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #090d16;
+            --bg-secondary: #0f172a;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --border-hover: rgba(255, 255, 255, 0.10);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-rose: #f43f5e;
+            --accent-pink: #ec4899;
+            --accent-violet: #a855f7;
+            --accent-amber: #f59e0b;
+            --accent-cyan: #06b6d4;
+            --accent-emerald: #10b981;
+            --gradient-primary: linear-gradient(135deg, #f43f5e, #ec4899, #a855f7);
+            --gradient-hero: linear-gradient(135deg, #ec4899, #d946ef, #a855f7, #6366f1);
+            --shadow-glow: 0 0 40px rgba(236, 72, 153, 0.08);
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+        }
+
+        body {
+            font-family: 'Noto Kufi Arabic', 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--accent-rose), var(--accent-violet)); border-radius: 10px; }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .glass-card:hover::before { opacity: 1; }
+        .glass-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-glow); }
+
+        /* Buttons */
+        .btn-gradient {
+            background: var(--gradient-primary);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            padding: 16px 28px;
+            box-shadow: 0 4px 25px rgba(236, 72, 153, 0.25);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(236, 72, 153, 0.45);
+        }
+        .btn-gradient:active { transform: translateY(0); }
+        .btn-gradient:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .btn-tab {
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .btn-tab:hover { background: rgba(255, 255, 255, 0.06); color: var(--text-primary); }
+        .btn-tab.active {
+            background: var(--gradient-primary);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 20px rgba(236, 72, 153, 0.25);
+        }
+
+        .btn-snap {
+            background: linear-gradient(135deg, #fffc00, #f1e400);
+            color: #000;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-snap:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(255, 252, 0, 0.4); }
+
+        .btn-telegram {
+            background: linear-gradient(135deg, #0088cc, #24a1de);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-telegram:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0, 136, 204, 0.4); }
+
+        /* Input */
+        .input-field {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px 120px 16px 50px;
+            color: var(--text-primary);
+            width: 100%;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus { outline: none; border-color: var(--accent-pink); box-shadow: 0 0 30px rgba(236, 72, 153, 0.06); }
+        .input-field::placeholder { color: var(--text-muted); }
+
+        /* Modal */
+        .modal-overlay {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.show { opacity: 1; pointer-events: auto; }
+        .modal-content { transform: scale(0.85); transition: all 0.3s ease; }
+        .modal-overlay.show .modal-content { transform: scale(1); }
+
+        /* Toast */
+        .toast-container { position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+        .toast { background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255, 255, 255, 0.08); padding: 14px 18px; border-radius: var(--radius-md); color: #fff; font-size: 13px; font-weight: 600; animation: slideIn 0.35s ease; backdrop-filter: blur(20px); pointer-events: auto; }
+        @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* Skeleton Loading */
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .skeleton { background: linear-gradient(90deg, var(--border-color) 25%, rgba(255,255,255,0.03) 50%, var(--border-color) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: var(--radius-sm); }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .input-field { padding: 14px 100px 14px 40px; font-size: 13px; }
+            .btn-gradient { padding: 14px 20px; font-size: 13px; }
+        }
     </style>
 </head>
 <body>
 
+<!-- Toast Container -->
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- Welcome Modal -->
-<div id="welcomeModal" class="modal show">
-    <div class="modal-inner glass w-[90%] max-w-[460px] p-6 text-center">
+<div id="welcomeModal" class="modal-overlay show">
+    <div class="modal-content glass-card w-[90%] max-w-[460px] p-6 text-center">
         <div class="text-5xl mb-3">🚀</div>
         <h2 class="text-xl font-black mb-1">بەخێربێیت بۆ KRD-ProDown</h2>
-        <p class="text-xs text-slate-400 mb-5">٦ پلاتفۆرمی سەرەکی | بێ واتەرمارک | 4K/8K</p>
-        <div class="grid grid-cols-2 gap-2">
-            <button onclick="selectPlatform('TikTok')" class="flex items-center gap-2 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 transition-all text-sm font-bold"><i class="fa-brands fa-tiktok text-rose-500"></i> TikTok</button>
-            <button onclick="selectPlatform('Instagram')" class="flex items-center gap-2 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-pink-500/50 transition-all text-sm font-bold"><i class="fa-brands fa-instagram text-pink-500"></i> Instagram</button>
-            <button onclick="selectPlatform('YouTube')" class="flex items-center gap-2 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-red-500/50 transition-all text-sm font-bold"><i class="fa-brands fa-youtube text-red-500"></i> YouTube</button>
-            <button onclick="selectPlatform('Facebook')" class="flex items-center gap-2 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-sky-500/50 transition-all text-sm font-bold"><i class="fa-brands fa-facebook text-sky-500"></i> Facebook</button>
-            <button onclick="selectPlatform('Snapchat')" class="flex items-center gap-2 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-amber-400/50 transition-all text-sm font-bold"><i class="fa-brands fa-snapchat text-amber-400"></i> Snapchat</button>
-            <button onclick="selectPlatform('Pinterest')" class="flex items-center gap-2 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-red-600/50 transition-all text-sm font-bold"><i class="fa-brands fa-pinterest text-red-600"></i> Pinterest</button>
+        <p class="text-xs text-slate-400 mb-5">کام تۆڕی کۆمەڵایەتی بەکاردێنیت؟</p>
+        <div class="space-y-2">
+            <button onclick="selectPlatform('TikTok')" class="w-full flex items-center gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 transition-all text-sm font-bold"><i class="fa-brands fa-tiktok text-rose-500 text-lg"></i> TikTok (تیک تۆک)</button>
+            <button onclick="selectPlatform('Instagram')" class="w-full flex items-center gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-pink-500/50 transition-all text-sm font-bold"><i class="fa-brands fa-instagram text-pink-500 text-lg"></i> Instagram (ئینستاگرام)</button>
+            <button onclick="selectPlatform('Snapchat')" class="w-full flex items-center gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-amber-400/50 transition-all text-sm font-bold"><i class="fa-brands fa-snapchat text-amber-400 text-lg"></i> Snapchat (سناپ چات)</button>
+            <button onclick="selectPlatform('Facebook')" class="w-full flex items-center gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-sky-500/50 transition-all text-sm font-bold"><i class="fa-brands fa-facebook text-sky-500 text-lg"></i> Facebook (فەیسبووک)</button>
+            <button onclick="selectPlatform('Pinterest')" class="w-full flex items-center gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-red-600/50 transition-all text-sm font-bold"><i class="fa-brands fa-pinterest text-red-600 text-lg"></i> Pinterest (پینترێست)</button>
         </div>
     </div>
 </div>
 
 <!-- Header -->
-<header class="border-b border-white/5 py-3 px-4 sticky top-0 z-40 bg-[#0a0a1a]/85 backdrop-blur-2xl">
+<header class="border-b border-white/[0.03] py-3 px-4 sticky top-0 z-40 bg-[#090d16]/85 backdrop-blur-2xl">
     <div class="max-w-3xl mx-auto flex justify-between items-center">
         <a href="/" class="flex items-center gap-2.5 group">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-violet-600 flex items-center justify-center shadow-lg shadow-pink-500/25 group-hover:shadow-pink-500/50 transition-all">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-violet-600 flex items-center justify-center shadow-lg shadow-rose-500/20 group-hover:shadow-rose-500/40 group-hover:scale-110 transition-all duration-300">
                 <i class="fa-solid fa-bolt text-white text-sm"></i>
             </div>
-            <span class="text-xl font-extrabold"><span class="text-white">KRD-</span><span class="bg-gradient-to-r from-pink-400 to-violet-400 bg-clip-text text-transparent">ProDown</span></span>
+            <span class="text-xl font-extrabold tracking-tight">
+                <span class="text-white">KRD-</span><span class="bg-gradient-to-r from-rose-400 to-violet-400 bg-clip-text text-transparent">ProDown</span>
+            </span>
         </a>
         <div class="flex items-center gap-2">
-            <select id="langSelect" onchange="changeLanguage(this.value)" class="text-[10px] bg-white/5 border border-white/5 text-slate-400 rounded-lg px-2 py-1.5">
-                <option value="badini">کوردی</option><option value="sorani">سۆرانی</option><option value="ar">العربية</option><option value="en">English</option>
+            <select id="langSelect" onchange="changeLanguage(this.value)" class="text-[10px] bg-white/[0.03] border border-white/[0.06] text-slate-400 rounded-lg px-2 py-1.5 focus:outline-none cursor-pointer">
+                <option value="badini">کوردی</option>
+                <option value="sorani">سۆرانی</option>
+                <option value="ar">العربية</option>
+                <option value="en">English</option>
             </select>
-            <button onclick="toggleTheme()" class="w-9 h-9 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-slate-400 hover:text-white"><i id="themeIcon" class="fa-solid fa-moon text-xs"></i></button>
+            <span class="text-[10px] text-emerald-400 font-bold flex items-center gap-1.5 bg-emerald-500/5 border border-emerald-500/20 px-2.5 py-1 rounded-full">
+                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Online
+            </span>
+            <button onclick="toggleTheme()" class="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-slate-400 hover:text-white transition-all">
+                <i id="themeIcon" class="fa-solid fa-moon text-xs"></i>
+            </button>
         </div>
     </div>
 </header>
 
-<!-- Main -->
+<!-- Main Content -->
 <main class="max-w-3xl mx-auto px-4 py-8">
-    <div class="text-center mb-8">
-        <h1 class="text-3xl sm:text-4xl font-extrabold mb-2">دابەزێنەری <span class="bg-gradient-to-r from-pink-400 via-fuchsia-400 to-violet-400 bg-clip-text text-transparent">پڕۆفیشناڵ</span></h1>
-        <p class="text-sm text-slate-400">٦ پلاتفۆرم | بێ واتەرمارک | کوالێتی بەرز | ٤ زمان</p>
+    
+    <!-- Ad Block -->
+    <div class="mb-5 flex justify-center overflow-hidden rounded-2xl bg-white/[0.02] border border-white/[0.04] p-1">
+        <div class="h-[60px] w-full max-w-[728px] bg-white/[0.01] flex items-center justify-center text-[11px] text-slate-600 font-semibold tracking-wider">
+            <i class="fa-solid fa-ad ml-2 text-slate-700"></i> KRD-ProDown Advertisement Block
+        </div>
     </div>
 
-    <!-- AdSense - Top Banner -->
-    <div class="max-w-3xl mx-auto mb-5">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-7926552217625654"
-             data-ad-slot="1234567890"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <!-- Hero -->
+    <div class="text-center mb-6">
+        <h1 class="text-2xl sm:text-3xl font-extrabold leading-tight mb-2" id="mainTitle">
+            Download Social Media Videos & Stories Without Watermark
+        </h1>
+        <button onclick="toggleGuide()" class="mt-2 text-xs font-bold text-rose-400 hover:text-rose-300 flex items-center justify-center gap-1.5 mx-auto cursor-pointer bg-rose-500/8 px-4 py-2 rounded-full transition-all">
+            <i class="fa-solid fa-circle-play"></i> <span id="guideText">How to download media?</span>
+        </button>
+        
+        <!-- Quick Guide (Hidden) -->
+        <div id="guideBox" class="hidden glass-card p-4 mt-3 text-right">
+            <div class="flex items-center gap-2 mb-3 border-b border-white/5 pb-2">
+                <i class="fa-solid fa-circle-info text-rose-400"></i>
+                <span class="text-xs font-bold">Quick Download Guide</span>
+            </div>
+            <ol class="text-xs text-slate-400 space-y-2 pr-4">
+                <li>Copy the video link from any social media app</li>
+                <li>Paste the link in the input field above</li>
+                <li>Click the Download button and save your media</li>
+            </ol>
+        </div>
     </div>
 
-    <div class="glass p-5 sm:p-6 mb-5">
+    <!-- Main Converter Card -->
+    <div class="glass-card p-5 sm:p-6 mb-5">
+        <!-- Tabs -->
+        <div class="flex gap-2 justify-center mb-4">
+            <button onclick="switchMode('link')" id="modeLink" class="btn-tab active">
+                <i class="fa-solid fa-link ml-1.5"></i> URL Link
+            </button>
+            <button onclick="switchMode('username')" id="modeUsername" class="btn-tab">
+                <i class="fa-solid fa-at ml-1.5"></i> Username
+            </button>
+        </div>
+
+        <!-- Input -->
         <div class="relative">
-            <i class="fa-solid fa-link absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
-            <input type="text" id="videoUrl" placeholder="لینکی ڤیدیۆکە لێرە دابنێ..." class="input" autocomplete="off">
-            <button onclick="pasteLink()" class="absolute left-3 top-1/2 -translate-y-1/2 text-xs bg-white/10 hover:bg-white/20 text-slate-300 px-3 py-1.5 rounded-lg flex items-center gap-1"><i class="fa-solid fa-paste text-[10px]"></i> پەیست</button>
+            <i class="fa-solid fa-link absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm z-10"></i>
+            <input type="text" id="videoUrl" placeholder="Paste video link here..." class="input-field" autocomplete="off">
+            <button onclick="clearInput()" id="clearBtn" class="hidden absolute left-24 top-1/2 -translate-y-1/2 text-rose-400 hover:text-rose-300 text-sm z-10 transition-colors">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+            <button onclick="pasteLink()" class="absolute left-3 top-1/2 -translate-y-1/2 text-xs bg-white/[0.05] hover:bg-white/[0.10] border border-white/[0.06] text-slate-300 px-3 py-2 rounded-xl transition-all flex items-center gap-1.5 z-10">
+                <i class="fa-solid fa-paste text-[10px]"></i> Paste
+            </button>
         </div>
         <div id="platformBadge" class="hidden mt-2 text-[10px] text-slate-400 text-center font-bold"></div>
-        <button id="downloadBtn" onclick="downloadVideo()" class="btn w-full mt-4 text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-download"></i> دابەزێنە</button>
+
+        <!-- Download Button -->
+        <button id="downloadBtn" onclick="downloadVideo()" class="btn-gradient w-full mt-4 text-sm flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i> <span id="downloadText">Download</span> ↓
+        </button>
+
+        <!-- Share Buttons -->
+        <div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-white/[0.04]">
+            <button onclick="shareToSnapchat()" class="btn-snap text-sm flex items-center justify-center gap-2">
+                <i class="fa-brands fa-snapchat text-lg"></i> Snapchat Share
+            </button>
+            <button onclick="shareToTelegram()" class="btn-telegram text-sm flex items-center justify-center gap-2">
+                <i class="fa-brands fa-telegram text-lg"></i> Telegram Share
+            </button>
+        </div>
     </div>
 
-    <div id="previewCard" class="hidden glass p-4 sm:p-5 mb-5">
-        <video id="previewVideo" class="w-full max-h-[400px] object-contain rounded-xl bg-black" controls></video>
+    <!-- Preview Card -->
+    <div id="previewCard" class="hidden glass-card p-4 sm:p-5 mb-5">
+        <div class="relative bg-black rounded-xl overflow-hidden">
+            <video id="previewVideo" class="w-full max-h-[400px] object-contain" controls></video>
+            <img id="previewImage" class="hidden w-full max-h-[400px] object-contain" alt="Preview">
+        </div>
         <div class="mt-4 space-y-3">
-            <div class="flex items-center justify-between"><h3 id="previewAuthor" class="font-bold text-sm"></h3><span id="previewPlatform" class="text-[10px] px-2 py-1 rounded-full bg-white/5 text-slate-400"></span></div>
+            <div class="flex items-center justify-between">
+                <h3 id="previewAuthor" class="font-bold text-sm"></h3>
+                <span id="previewPlatform" class="text-[10px] px-2 py-1 rounded-full bg-white/[0.03] text-slate-400 border border-white/[0.05]"></span>
+            </div>
+            <p id="previewDesc" class="text-xs text-slate-400 line-clamp-2"></p>
+            
+            <!-- Quality Selector -->
             <div class="flex gap-2">
-                <button onclick="downloadQuality('720p')" class="text-[10px] bg-white/5 border border-white/5 px-3 py-1 rounded-lg text-slate-400 hover:text-white transition-all">720p</button>
-                <button onclick="downloadQuality('1080p')" class="text-[10px] bg-white/5 border border-white/5 px-3 py-1 rounded-lg text-slate-400 hover:text-white transition-all">1080p</button>
-                <button onclick="downloadQuality('4K')" class="text-[10px] bg-white/5 border border-white/5 px-3 py-1 rounded-lg text-slate-400 hover:text-white transition-all">4K</button>
-                <button onclick="extractAudio()" class="text-[10px] bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-lg text-amber-400 hover:text-white transition-all">MP3</button>
+                <button onclick="downloadQuality('720p')" class="text-[10px] bg-white/[0.03] border border-white/[0.05] px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-all">720p HD</button>
+                <button onclick="downloadQuality('1080p')" class="text-[10px] bg-white/[0.03] border border-white/[0.05] px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-all">1080p Full HD</button>
+                <button onclick="downloadQuality('4K')" class="text-[10px] bg-white/[0.03] border border-white/[0.05] px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-all">4K Ultra HD</button>
+                <button onclick="extractAudio()" class="text-[10px] bg-amber-500/8 border border-amber-500/20 px-3 py-1.5 rounded-lg text-amber-400 hover:bg-amber-500/15 transition-all">MP3</button>
             </div>
-            <div class="flex gap-2">
-                <button id="dlBtn" class="btn flex-1 py-2.5 text-xs rounded-xl"><i class="fa-solid fa-download ml-1"></i> داونلۆد</button>
-                <button id="audioBtn" class="bg-white/5 border border-white/5 text-white py-2.5 px-4 rounded-xl text-xs"><i class="fa-solid fa-music"></i></button>
-            </div>
-        </div>
-    </div>
 
-    <!-- AdSense - In-Feed -->
-    <div class="glass p-4 mb-5 text-center">
-        <p class="text-[10px] text-slate-500 mb-2">ڕیکلام</p>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-7926552217625654"
-             data-ad-slot="0987654321"
-             data-ad-format="fluid"
-             data-ad-layout-key="-fb+5w+4e-db+86"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <!-- Support -->
-    <div class="glass p-5 sm:p-6 mb-5 text-center">
-        <button onclick="toggleSupport()" class="w-full flex items-center justify-between text-white font-bold text-sm"><span><i class="fa-solid fa-heart text-rose-400 ml-2"></i>پشتەڤانیا تە بۆ من</span><i id="supportArrow" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i></button>
-        <div id="supportDropdown" class="hidden mt-4 space-y-3">
-            <div class="grid grid-cols-2 gap-3">
-                <a href="https://fib.iq" target="_blank" class="flex flex-col items-center gap-2 bg-violet-500/5 border border-violet-500/20 rounded-2xl p-4 hover:bg-violet-500/10 transition-all"><i class="fa-solid fa-building-columns text-violet-400 text-xl"></i><span class="text-xs font-bold">FIB</span><code class="text-[10px] text-violet-400">+964 750 604 5491</code></a>
-                <a href="https://fastpay.iq" target="_blank" class="flex flex-col items-center gap-2 bg-pink-500/5 border border-pink-500/20 rounded-2xl p-4 hover:bg-pink-500/10 transition-all"><i class="fa-solid fa-bolt text-pink-400 text-xl"></i><span class="text-xs font-bold">FastPay</span><code class="text-[10px] text-pink-400">+964 750 604 5491</code></a>
+            <!-- Action Buttons -->
+            <div class="flex gap-2 pt-1">
+                <button id="dlBtn" class="btn-gradient flex-1 py-2.5 text-xs rounded-xl">
+                    <i class="fa-solid fa-download ml-1.5"></i> <span id="dlBtnText">Fast Download</span>
+                </button>
+                <button id="audioBtn" class="bg-white/[0.03] border border-white/[0.06] text-white py-2.5 px-4 rounded-xl text-xs hover:bg-white/[0.06] transition-all">
+                    <i class="fa-solid fa-music"></i>
+                </button>
+                <button id="copyBtn" class="bg-white/[0.03] border border-white/[0.06] text-white py-2.5 px-4 rounded-xl text-xs hover:bg-white/[0.06] transition-all" onclick="copyVideoLink()">
+                    <i class="fa-solid fa-copy"></i>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Contact -->
-    <div class="glass p-5 sm:p-6 mb-5 text-center">
-        <button onclick="toggleContact()" class="w-full flex items-center justify-between text-white font-bold text-sm"><span><i class="fa-solid fa-address-book text-pink-400 ml-2"></i>پەیوەندی</span><i id="contactArrow" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i></button>
-        <div id="contactDropdown" class="hidden mt-4 grid grid-cols-2 gap-2">
-            <a href="tel:+9647506045491" class="flex flex-col items-center gap-2 bg-white/[0.02] border border-white/5 rounded-2xl p-3 hover:border-pink-500/30 transition-all"><i class="fa-solid fa-phone text-pink-400 text-lg"></i><span class="text-[10px] font-bold">تەلەفۆن</span></a>
-            <a href="https://wa.me/9647506045491" target="_blank" class="flex flex-col items-center gap-2 bg-white/[0.02] border border-white/5 rounded-2xl p-3 hover:border-emerald-500/30 transition-all"><i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i><span class="text-[10px] font-bold">واتساپ</span></a>
-            <a href="https://t.me/z_14x" target="_blank" class="flex flex-col items-center gap-2 bg-white/[0.02] border border-white/5 rounded-2xl p-3 hover:border-sky-500/30 transition-all"><i class="fa-brands fa-telegram text-sky-400 text-lg"></i><span class="text-[10px] font-bold">تێلێگرام</span></a>
-            <a href="mailto:zaniyar.mzuri@email.com" class="flex flex-col items-center gap-2 bg-white/[0.02] border border-white/5 rounded-2xl p-3 hover:border-amber-500/30 transition-all"><i class="fa-solid fa-envelope text-amber-400 text-lg"></i><span class="text-[10px] font-bold">ئیمەیڵ</span></a>
+    <!-- Photo Card -->
+    <div id="photoCard" class="hidden glass-card p-4 sm:p-5 mb-5">
+        <div class="flex justify-between items-center mb-3">
+            <h3 class="font-bold text-sm">📸 Photo Album</h3>
+            <button onclick="downloadAllPhotos()" class="text-[10px] bg-rose-500 text-white px-3 py-1 rounded-lg font-bold hover:bg-rose-600 transition-all">Download All</button>
         </div>
+        <div id="photoGrid" class="grid grid-cols-3 gap-2"></div>
     </div>
 
-    <!-- AdSense - Footer -->
-    <div class="max-w-3xl mx-auto mb-5">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-7926552217625654"
-             data-ad-slot="1122334455"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
+    <!-- Footer -->
     <footer class="text-center py-6">
-        <p class="text-[10px] text-slate-600">© 2026 KRD-ProDown | گەشەپێدەر Zaniyar Al-Mzuri Al-Kurdi</p>
+        <div class="flex items-center justify-center gap-2 mb-2">
+            <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-rose-500 to-violet-600 flex items-center justify-center">
+                <i class="fa-solid fa-bolt text-white text-[10px]"></i>
+            </div>
+            <span class="text-sm font-bold text-white">KRD-<span class="text-rose-400">ProDown</span></span>
+        </div>
+        <p class="text-[10px] text-slate-600">© 2026 KRD-ProDown | Developed by Zaniyar Al-Mzuri Al-Kurdi</p>
         <div class="flex justify-center gap-4 mt-2">
-            <a href="https://t.me/z_14x" target="_blank" class="text-slate-600 hover:text-pink-400"><i class="fa-brands fa-telegram"></i></a>
-            <a href="https://instagram.com/z44nko" target="_blank" class="text-slate-600 hover:text-pink-400"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://tiktok.com/@z44nko" target="_blank" class="text-slate-600 hover:text-pink-400"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://t.me/z_14x" target="_blank" class="text-slate-600 hover:text-rose-400 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://instagram.com/z44nko" target="_blank" class="text-slate-600 hover:text-rose-400 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com/@z44nko" target="_blank" class="text-slate-600 hover:text-rose-400 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://snapchat.com/t/VmOzLBj3" target="_blank" class="text-slate-600 hover:text-rose-400 transition-colors"><i class="fa-brands fa-snapchat"></i></a>
         </div>
     </footer>
 </main>
 
 <script>
-let currentVideoUrl='',currentPlatform='',currentLang='badini';
+// ===== KRD-ProDown - Main Script =====
+let currentVideoUrl='',currentPlatform='',currentMode='link',currentLang='badini';
 
-function selectPlatform(n){currentPlatform=n;document.getElementById('welcomeModal').classList.remove('show');setTimeout(()=>document.getElementById('welcomeModal').style.display='none',300);toast('✅ '+n+' هەڵبژێردرا')}
-function toggleTheme(){document.body.classList.toggle('light-mode');const l=document.body.classList.contains('light-mode');localStorage.setItem('theme',l?'light':'dark');document.getElementById('themeIcon').className=l?'fa-solid fa-sun text-xs':'fa-solid fa-moon text-xs'}
-function toast(m){const c=document.getElementById('toastContainer');const t=document.createElement('div');t.className='toast';t.textContent=m;c.appendChild(t);setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(120%)';t.style.transition='0.3s';setTimeout(()=>t.remove(),300)},2500)}
-function pasteLink(){navigator.clipboard.readText().then(t=>{document.getElementById('videoUrl').value=t;detectPlatform();toast('📋 لینک پەیست کرا')}).catch(()=>{})}
+// Init
+window.addEventListener('DOMContentLoaded',()=>{
+    setTimeout(()=>document.getElementById('welcomeModal').classList.add('show'),500);
+    const input=document.getElementById('videoUrl');
+    input.addEventListener('input',()=>{
+        const clearBtn=document.getElementById('clearBtn');
+        clearBtn.classList.toggle('hidden',!input.value.trim());
+        detectPlatform();
+    });
+});
+
+// Platform Selection
+function selectPlatform(n){
+    currentPlatform=n;
+    document.getElementById('welcomeModal').classList.remove('show');
+    setTimeout(()=>document.getElementById('welcomeModal').style.display='none',300);
+    toast('✅ '+n+' selected')
+}
+
+// Theme
+function toggleTheme(){
+    document.body.classList.toggle('light-mode');
+    const l=document.body.classList.contains('light-mode');
+    localStorage.setItem('theme',l?'light':'dark');
+    document.getElementById('themeIcon').className=l?'fa-solid fa-sun text-xs':'fa-solid fa-moon text-xs'
+}
+
+// Toast
+function toast(m){
+    const c=document.getElementById('toastContainer');
+    const t=document.createElement('div');t.className='toast';t.textContent=m;
+    c.appendChild(t);
+    setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(120%)';t.style.transition='0.3s';setTimeout(()=>t.remove(),300)},2500)
+}
+
+// Input
+function pasteLink(){
+    navigator.clipboard.readText().then(t=>{
+        document.getElementById('videoUrl').value=t;
+        document.getElementById('clearBtn').classList.remove('hidden');
+        detectPlatform();
+        toast('📋 Link pasted')
+    }).catch(()=>{})
+}
+function clearInput(){
+    document.getElementById('videoUrl').value='';
+    document.getElementById('clearBtn').classList.add('hidden');
+    document.getElementById('platformBadge').classList.add('hidden')
+}
+function copyVideoLink(){
+    if(!currentVideoUrl)return toast('⚠️ No video URL');
+    navigator.clipboard.writeText(currentVideoUrl);
+    toast('📋 Link copied')
+}
+
+// Guide
+function toggleGuide(){document.getElementById('guideBox').classList.toggle('hidden')}
+
+// Mode
+function switchMode(m){
+    currentMode=m;
+    document.getElementById('modeLink').classList.toggle('active',m==='link');
+    document.getElementById('modeUsername').classList.toggle('active',m==='username')
+}
+
+// Language
 function changeLanguage(l){currentLang=l;localStorage.setItem('lang',l)}
-function toggleContact(){document.getElementById('contactDropdown').classList.toggle('hidden');document.getElementById('contactArrow').classList.toggle('rotate-180')}
-function toggleSupport(){document.getElementById('supportDropdown').classList.toggle('hidden');document.getElementById('supportArrow').classList.toggle('rotate-180')}
-function downloadQuality(q){if(!currentVideoUrl)return;const a=document.createElement('a');a.href=currentVideoUrl;a.download='KRD-ProDown_'+q+'.mp4';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a)}
 
+// Share
+function shareToSnapchat(){window.open('https://www.snapchat.com/scan?attachmentUrl='+encodeURIComponent(location.href),'_blank');toast('💛 Shared to Snapchat')}
+function shareToTelegram(){window.open('https://t.me/share/url?url='+encodeURIComponent(location.href),'_blank');toast('💙 Shared to Telegram')}
+
+// Download Quality
+function downloadQuality(q){if(!currentVideoUrl)return;const a=document.createElement('a');a.href=currentVideoUrl;a.download='KRD-ProDown_'+q+'.mp4';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a)}
+function downloadAllPhotos(){
+    const imgs=document.querySelectorAll('#photoGrid img');
+    imgs.forEach((img,i)=>setTimeout(()=>{const a=document.createElement('a');a.href=img.src;a.download='KRD-ProDown_photo_'+(i+1)+'.jpg';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a)},i*300))
+}
+
+// Detect Platform
 function detectPlatform(){
     const u=document.getElementById('videoUrl').value.trim();
     const b=document.getElementById('platformBadge');
     if(!u){b.classList.add('hidden');return}
-    const p={'tiktok.com':'🎵 TikTok','instagram.com':'📸 Instagram','youtube.com':'▶️ YouTube','youtu.be':'▶️ YouTube','facebook.com':'📘 Facebook','snapchat.com':'👻 Snapchat','pinterest.com':'📌 Pinterest'};
-    for(const[d,n]of Object.entries(p)){if(u.includes(d)){b.classList.remove('hidden');b.textContent='🔍 '+n;currentPlatform=n;return}}
+    const p={'tiktok.com':'🎵 TikTok','instagram.com':'📸 Instagram','youtube.com':'▶️ YouTube','youtu.be':'▶️ YouTube','facebook.com':'📘 Facebook','snapchat.com':'👻 Snapchat','pinterest.com':'📌 Pinterest','pin.it':'📌 Pinterest'};
+    for(const[d,n]of Object.entries(p)){if(u.includes(d)){b.classList.remove('hidden');b.textContent='🔍 Detected: '+n;currentPlatform=n;return}}
     b.classList.add('hidden')
 }
 
+// Extract Audio
 async function extractAudio(){
-    if(!currentVideoUrl)return toast('⚠️ سەرەتا ڤیدیۆ بدۆزەرەوە');
+    const url=document.getElementById('videoUrl').value.trim();
+    if(!url)return toast('⚠️ Enter a video URL first');
     try{
-        const r=await fetch('https://api.cobalt.tools/api/json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:document.getElementById('videoUrl').value,isAudioOnly:true,aFormat:'mp3'})});
+        const r=await fetch('https://api.cobalt.tools/api/json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,isAudioOnly:true,aFormat:'mp3'})});
         const d=await r.json();
-        if(d.url){const a=document.createElement('a');a.href=d.url;a.download='KRD-ProDown_Audio.mp3';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a);toast('🎵 دەنگ ئامادەیە!')}
-    }catch(e){toast('❌ نەتوانرا')}
+        if(d.url){const a=document.createElement('a');a.href=d.url;a.download='KRD-ProDown_Audio.mp3';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a);toast('🎵 Audio ready!')}
+    }catch(e){toast('❌ Failed')}
 }
 
+// Main Download
 async function downloadVideo(){
     const url=document.getElementById('videoUrl').value.trim();
-    if(!url)return toast('⚠️ لینکی ڤیدیۆ بنووسە');
-    const btn=document.getElementById('downloadBtn'),o=btn.innerHTML;btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin ml-2"></i> چاوەڕێ بە...';
+    if(!url)return toast('⚠️ Please enter a video link');
+    const btn=document.getElementById('downloadBtn'),o=btn.innerHTML;
+    btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin ml-2"></i> Processing...';
     document.getElementById('previewCard').classList.add('hidden');
+    document.getElementById('photoCard').classList.add('hidden');
     try{
         let result;
         if(url.includes('tiktok.com')){
-            const r=await fetch('https://www.tikwm.com/api/?url='+encodeURIComponent(url));const d=await r.json();
-            if(d.code===0&&d.data){result={videoUrl:d.data.hdplay||d.data.play,audioUrl:d.data.music,author:d.data.author?.nickname||'TikTok',platform:'TikTok'}}
+            const r=await fetch('https://www.tikwm.com/api/?url='+encodeURIComponent(url));
+            const d=await r.json();
+            if(d.code===0&&d.data){
+                result={videoUrl:d.data.hdplay||d.data.play,audioUrl:d.data.music,author:d.data.author?.nickname||'TikTok',title:d.data.title||'',platform:'TikTok'}
+            }
         }else{
-            const r=await fetch('https://api.cobalt.tools/api/json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,vQuality:'720',filenamePattern:'basic'})});const d=await r.json();
-            if(d.url||d.status==='redirect'||d.status==='stream'){result={videoUrl:d.url,audioUrl:d.url,author:currentPlatform||'Media',platform:currentPlatform||'Video'}}
+            const r=await fetch('https://api.cobalt.tools/api/json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,vQuality:'720',filenamePattern:'basic'})});
+            const d=await r.json();
+            if(d.url||d.status==='redirect'||d.status==='stream'){result={videoUrl:d.url,audioUrl:d.url,author:currentPlatform||'Media',title:'',platform:currentPlatform||'Video'}}
             else if(d.status==='picker'&&d.picker?.length){result={images:d.picker.map(i=>i.url),platform:'Album'}}
         }
         if(result){
-            if(result.images){showPhotos(result.images);toast('✅ ئەلبوم ئامادەیە!')}
-            else{currentVideoUrl=result.videoUrl;showPreview(result);toast('✅ سەرکەوتوو بوو!')}
-        }else{toast('❌ نەتوانرا داونلۆد بکرێت')}
-    }catch(e){toast('❌ کێشەیەک ڕوویدا')}
+            if(result.images){showPhotos(result.images);toast('✅ Album ready!')}
+            else{currentVideoUrl=result.videoUrl;showPreview(result);toast('✅ Download ready!')}
+        }else{toast('❌ Could not download')}
+    }catch(e){toast('❌ An error occurred')}
     btn.disabled=false;btn.innerHTML=o
 }
 
@@ -263,19 +546,18 @@ function showPreview(d){
     document.getElementById('previewVideo').src=d.videoUrl;
     document.getElementById('previewAuthor').textContent=d.author;
     document.getElementById('previewPlatform').textContent=d.platform;
+    document.getElementById('previewDesc').textContent=d.title;
     document.getElementById('dlBtn').onclick=()=>{const a=document.createElement('a');a.href=d.videoUrl;a.download='KRD-ProDown.mp4';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a)};
     document.getElementById('audioBtn').onclick=()=>{const a=document.createElement('a');a.href=d.audioUrl;a.download='KRD-ProDown.mp3';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a)};
     document.getElementById('previewCard').scrollIntoView({behavior:'smooth'})
 }
 
 function showPhotos(imgs){
-    const c=document.createElement('div');c.className='glass p-4 sm:p-5 mb-5';c.innerHTML='<h3 class="font-bold text-sm mb-3">📸 ئەلبومی وێنەکان</h3><div class="grid grid-cols-3 gap-2">'+imgs.map((u,i)=>'<div class="relative group rounded-xl overflow-hidden aspect-square bg-slate-800"><img src="https://images.weserv.nl/?url='+encodeURIComponent(u)+'" class="w-full h-full object-cover" loading="lazy"><button onclick="(function(){const a=document.createElement(\'a\');a.href=\''+u+'\';a.download=\'KRD-ProDown_'+(i+1)+'.jpg\';a.target=\'_blank\';document.body.appendChild(a);a.click()})()" class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 text-white text-xs font-bold"><i class="fa-solid fa-download ml-1"></i></button></div>').join('')+'</div>';
-    document.getElementById('previewCard').insertAdjacentElement('afterend',c);
+    const c=document.getElementById('photoCard');
+    c.classList.remove('hidden');
+    document.getElementById('photoGrid').innerHTML=imgs.map((u,i)=>'<div class="relative group rounded-xl overflow-hidden aspect-square bg-slate-800"><img src="https://images.weserv.nl/?url='+encodeURIComponent(u)+'" class="w-full h-full object-cover" loading="lazy"><button onclick="(function(){const a=document.createElement(\'a\');a.href=\''+u+'\';a.download=\'KRD-ProDown_'+(i+1)+'.jpg\';a.target=\'_blank\';document.body.appendChild(a);a.click()})()" class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 text-white text-xs font-bold"><i class="fa-solid fa-download ml-1"></i></button></div>').join('');
     c.scrollIntoView({behavior:'smooth'})
 }
-
-if(localStorage.getItem('theme')==='light'){document.body.classList.add('light-mode');document.getElementById('themeIcon').className='fa-solid fa-sun text-xs'}
-window.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>document.getElementById('welcomeModal').classList.add('show'),500)});
 </script>
 </body>
 </html>
